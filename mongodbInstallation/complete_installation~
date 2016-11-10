@@ -1,0 +1,42 @@
+﻿Press cltr+alt+T
+  
+	sudo su
+
+Check all available mongodb on your machine 
+
+       sudo dpkg -l | grep mongo
+
+Remove All mongoDB from your machine 
+
+    sudo apt-get remove mongodb* --purge
+
+Add Key
+
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+Add Sources List
+
+	echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+Update your sources
+	
+	sudo apt-get update
+
+Install mongodb-org
+
+	sudo apt-get install mongodb-org
+
+Check if working
+
+	sudo systemctl status mongod
+
+If not working
+	
+	sudo reboot
+
+If still not working
+
+	Run this script: enable_mongo.sh
+
+
+reference link :::::::      http://askubuntu.com/questions/724749/install-mongo-3-2-on-ubuntu-15-10
