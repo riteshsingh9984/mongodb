@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div class="row">
+		<div class="col-sm-12">
+			<div th:replace="component :: cmsHeader"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 jumbotron">
+				<div class="table-responsive">
+					<table id="example" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Id</th>
+			                <th>Name</th>
+			                <th>Alias</th>
+			            </tr>
+			        </thead>
+			    </table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadCreateHost"></div>
+</body>
+</html>

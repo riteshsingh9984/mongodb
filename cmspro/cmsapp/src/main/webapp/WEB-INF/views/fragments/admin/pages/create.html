@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div class="row">
+			<div class="col-sm-12">
+				<div th:replace="component :: cmsHeader"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 jumbotron">
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Your Host</strong>
+						</div>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" readonly />
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Page Name</strong>
+						</div>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" /> 
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Select-Template</strong>
+						</div>
+						<div class="col-sm-8">
+							<select id='myTemplate' class='form-control'>
+        						<option>1col</option>
+        						<option>2col</option>
+        						<option>3col</option>
+        						<option>sparkCol</option>
+        						<option>leftCol</option>
+       						</select>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="btn btn-sm btn-success">save</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Template Preview -->
+				<div class="col-sm-6 full-border" style="height:288px;">
+					<div id="templatePreview" ></div>	
+				</div>
+				
+			</div>
+		</div>
+		<div th:replace="component :: jsLoadCreatePage"></div>
+	</body>
+</html>

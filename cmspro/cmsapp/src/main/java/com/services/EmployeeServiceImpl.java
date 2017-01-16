@@ -2,6 +2,7 @@ package com.services;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.Response;
 import com.dao.DataAccessObject;
 import com.google.gson.Gson;
 import com.models.Employee;
+import com.models.Host;
 
 @Service("employeeService")
 public class EmployeeServiceImpl extends DataAccessObject implements EmployeeService {
@@ -50,16 +52,16 @@ public class EmployeeServiceImpl extends DataAccessObject implements EmployeeSer
 
 	@Override
 	public List<Employee> getEmployees() {
-		
+		Gson gson = new Gson();
 		String url = ip+port;
 		try{
 			
-			Response apiResponse = new Gson().fromJson(sendGET(url+getApi), Response.class);
+			Response apiResponse = gson.fromJson(sendGET(url+getApi), Response.class);
 			
 			System.out.println("apiResponse = "+new Gson().toJson(apiResponse));
 			
 			if(apiResponse.getStatus().equals("200")){
-				List<Employee> employees = (List<Employee>) apiResponse.getData();
+				List<Employee> employees = gson.fromJson(gson.toJson(apiResponse.getData()), List.class);
 				return employees;
 			}
 		}catch(Exception ee){

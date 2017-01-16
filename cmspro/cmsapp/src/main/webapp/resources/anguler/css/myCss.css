@@ -1,1 +1,6 @@
-My CSS
+.full-border{
+	border:1px solid;
+}
+.placeholder-color::-webkit-input-placeholder {
+    color: #A52A2A;
+}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div th:replace="admin/templateBank/templates :: ${data.template}"></div>
+		
+		<div th:replace="component :: jsLoad"></div>
+	</body>
+</html>
