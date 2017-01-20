@@ -36,30 +36,39 @@ public class HostController {
 	@CrossOrigin
 	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String saveHost(ModelMap model, @RequestBody Host host,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		long id = hostService.count();
 		host.setId(id);
 		hostService.saveHost(host);
 		
-		return new Gson().toJson(host);
+		Response responseData = new Response();
+		responseData.setData(host);
+		responseData.setStatus("200");
+		
+		return new Gson().toJson(responseData);
 	}
 
 	@CrossOrigin
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String UpdateHost(ModelMap model, @RequestBody Host host,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		hostService.saveHost(host);
-		return new Gson().toJson(host);
+		
+		Response responseData = new Response();
+		responseData.setData(host);
+		responseData.setStatus("200");
+		
+		return new Gson().toJson(responseData);
 	}
 
 	@CrossOrigin
 	@RequestMapping(value = "/get-hosts", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String getHosts(ModelMap model,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		List<Host> hosts = hostService.getHosts();
@@ -74,7 +83,7 @@ public class HostController {
 	@CrossOrigin
 	@RequestMapping(value = "/get-host/{hostId}", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String getHostById(ModelMap model,@PathVariable("hostId") long hostId,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		Host host = hostService.getHostById(hostId);
@@ -88,7 +97,7 @@ public class HostController {
 	@CrossOrigin
 	@RequestMapping(value = "/get-host/hostName/{hostName}", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String getHostById(ModelMap model,@PathVariable("hostName") String hostName,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		Host host = hostService.getHostByName(hostName);

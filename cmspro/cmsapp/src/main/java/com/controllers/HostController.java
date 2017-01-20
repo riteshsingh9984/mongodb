@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.models.Host;
+import com.models.HostRequest;
+import com.models.HostResponse;
 import com.services.HostService;
 
 @Controller
@@ -42,7 +43,7 @@ public class HostController {
 	}
 	
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("hostSave") Host host, BindingResult result,
+	public ModelAndView save(@ModelAttribute("hostSave") HostRequest host, BindingResult result,
 			HttpServletRequest request) throws Exception {
 		System.out.println("Host Details : " + new Gson().toJson(host));
 		try {
@@ -74,12 +75,12 @@ public class HostController {
 	@RequestMapping(value = "/gethosts", method = RequestMethod.GET)
     public @ResponseBody Object getHostList() {
 		Gson gson = new Gson();
-		Set<Host> hosts = hostService.getHosts();
-		Host host = null;
-		Set<Host> hostList = new HashSet<Host>();
+		Set<HostResponse> hosts = hostService.getHosts();
+		HostResponse host = null;
+		Set<HostResponse> hostList = new HashSet<HostResponse>();
 		
 		for(Object object : hosts){
-			host = gson.fromJson(gson.toJson(object), Host.class);
+			host = gson.fromJson(gson.toJson(object), HostResponse.class);
 			
 			if(host.getAliasName() == null )
 				host.setAliasName("Not-Set");

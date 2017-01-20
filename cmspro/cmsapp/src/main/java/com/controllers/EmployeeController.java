@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.models.Employee;
+import com.models.EmployeeRequest;
 import com.services.EmployeeService;
 @Controller
 @ComponentScan("com.services, com.repo")
@@ -43,7 +43,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
 	public ModelAndView form() throws IOException {
-		Employee employee = new Employee();
+		EmployeeRequest employee = new EmployeeRequest();
 		employee.setName("RITESH SINGH");
 		
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -52,7 +52,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("employeeSave") Employee employee, BindingResult result,
+	public ModelAndView save(@ModelAttribute("employeeSave") EmployeeRequest employee, BindingResult result,
 			HttpServletRequest request) throws Exception {
 		System.out.println("Student Details : " + new Gson().toJson(employee));
 		try {
@@ -65,11 +65,11 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = { "/get-employees" }, method = RequestMethod.GET)
-	public ModelAndView getEmployees() throws IOException {
-		Employee employee = new Employee();
+	public ModelAndView getEmployeeRequests() throws IOException {
+		EmployeeRequest employee = new EmployeeRequest();
 		employee.setName("RITESH SINGH");
 		
-		List<Employee> employees = new ArrayList<Employee>();
+		List<EmployeeRequest> employees = new ArrayList<EmployeeRequest>();
 		employees.add(employee);
 		
 		Map<String, Object> data = new HashMap<String, Object>();

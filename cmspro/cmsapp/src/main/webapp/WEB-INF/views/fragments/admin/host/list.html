@@ -6,24 +6,33 @@
 <div th:replace="component :: title"></div>
 </head>
 <body>
-	<div class="row">
-		<div class="col-sm-12">
-			<div th:replace="component :: cmsHeader"></div>
-		</div>
-	</div>
+	<div th:replace="component :: cmsHeader"></div>
 	<div class="container">
+		<div class="message">
+			<p><span class="lable-name">Host</span>
+				<span class="label-value" th:text="${data.hostName}">www.rockon.com</span>
+				<input type="hidden" id="myHost" th:value="${data.hostName}"  />	
+			</p>
+		</div>
 		<div class="row">
-			<div class="col-sm-12 jumbotron">
+			<div class="col-sm-12 jumbotron relative">
+			<div class="btn-actions">
+				<a href="#" th:href="@{/admin/host/create}" title="Add New Site" class="btn btn-default btn-circle-sm btn-primary">+</a>			
+			</div>
 				<div class="table-responsive">
 					<table id="example" class="display" cellspacing="0" width="100%">
-			        <thead>
-			            <tr>
-			                <th>Id</th>
-			                <th>Name</th>
-			                <th>Alias</th>
-			            </tr>
-			        </thead>
-			    </table>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Alias</th>
+								<th>Total Pages</th>
+								<th>CreatedBy</th>
+								<th>CreatedAt</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
 			</div>
 		</div>

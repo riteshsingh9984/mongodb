@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.models.Employee;
 import com.models.UserProfile;
 
 @Controller

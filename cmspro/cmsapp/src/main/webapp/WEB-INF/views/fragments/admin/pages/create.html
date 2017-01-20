@@ -14,12 +14,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 jumbotron">
+				<form action="#" th:action="@{/admin/page/save}" method="post">
 					<div class="row">
 						<div class="col-sm-4">
 							<strong>Your Host</strong>
 						</div>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" readonly />
+							<input type="text" name="hostName" th:value="${data.hostName}" class="form-control" readonly />
 						</div>
 					</div>
 					<br/>
@@ -28,7 +29,7 @@
 							<strong>Page Name</strong>
 						</div>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" /> 
+							<input type="text" name="pageName" class="form-control" /> 
 						</div>
 					</div>
 					<br/>
@@ -37,7 +38,7 @@
 							<strong>Select-Template</strong>
 						</div>
 						<div class="col-sm-8">
-							<select id='myTemplate' class='form-control'>
+							<select name="templateName" id='myTemplate' class='form-control'>
         						<option>1col</option>
         						<option>2col</option>
         						<option>3col</option>
@@ -49,9 +50,10 @@
 					<br/>
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="btn btn-sm btn-success">save</div>
+							<input class="btn btn-sm btn-success" type="submit" value="save" />
 						</div>
 					</div>
+					</form>
 				</div>
 				
 				<!-- Template Preview -->

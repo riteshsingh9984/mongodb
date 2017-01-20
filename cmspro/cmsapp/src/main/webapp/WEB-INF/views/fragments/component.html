@@ -71,8 +71,10 @@
 	<script
 		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 
+	<script
+		src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
-	<script type="text/javascript"
+	<script type="text/javascript" 
 		th:src="@{/resources/anguler/js/createPage.js}"
 		src="/resources/anguler/js/createPage.js"></script>
 </div>
@@ -122,8 +124,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="#" th:href="@{/admin/host/get-hosts}">Hosts</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="#" th:href="@{/admin/templates/create}">Templates</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

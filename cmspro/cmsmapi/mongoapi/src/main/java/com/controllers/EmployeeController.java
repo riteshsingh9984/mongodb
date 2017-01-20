@@ -46,7 +46,7 @@ public class EmployeeController {
 					 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String saveEmployee(ModelMap model, @RequestBody Employee employee,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		employeeService.saveEmployee(employee);
@@ -60,7 +60,7 @@ public class EmployeeController {
 					 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String UpdateEmployee(ModelMap model, @RequestBody Employee employee,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		employeeService.saveEmployee(employee);
@@ -75,7 +75,7 @@ public class EmployeeController {
 					 */
 	@RequestMapping(value = "/get-employee", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String getEmployee(ModelMap model,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		/*
@@ -103,7 +103,7 @@ public class EmployeeController {
 					 */
 	@RequestMapping(value = "/datademo1", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String save(ModelMap model, @RequestBody Employee employee,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		System.out.println(">>>>>>>>>>>>>>" + new Gson().toJson(employee));
@@ -118,7 +118,7 @@ public class EmployeeController {
 	@CrossOrigin
 	@RequestMapping(value = "/get-employee/{employeeId}", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String getEmployeeById(ModelMap model,@PathVariable("employeeId") long employeeId,
-			@RequestHeader(value = "User-Data", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
 			throws UnknownHostException {
 
 		Employee employee = employeeService.getEmployeeById(employeeId);

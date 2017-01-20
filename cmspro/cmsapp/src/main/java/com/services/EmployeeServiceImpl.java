@@ -1,8 +1,9 @@
 package com.services;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,7 @@ import org.springframework.stereotype.Service;
 import com.Response;
 import com.dao.DataAccessObject;
 import com.google.gson.Gson;
-import com.models.Employee;
-import com.models.Host;
+import com.models.EmployeeRequest;
 
 @Service("employeeService")
 public class EmployeeServiceImpl extends DataAccessObject implements EmployeeService {
@@ -32,16 +32,25 @@ public class EmployeeServiceImpl extends DataAccessObject implements EmployeeSer
  
 		String url = ip+port;
 		String data = new Gson().toJson(employee);
-		sendPOST(url+saveApi, data);
+		
+		Map<String, String> header = new HashMap<String, String>();
+		
+		header.put("token", "myToken");
+		
+		sendPOST(url+saveApi, data, header);
 	}
 	
-	public Employee fetchEmployeeBySsn(Object employee) throws IOException{
+	public EmployeeRequest fetchEmployeeBySsn(Object employee) throws IOException{
 		 
 		String url = ip+port;
 		String data = new Gson().toJson(employee);
 		try{
 			
-			Employee fetchedEmployee = new Gson().fromJson(new Gson().toJson(sendPOST(url+getApi, data)), Employee.class);
+			Map<String, String> header = new HashMap<String, String>();
+			
+			header.put("token", "myToken");
+			
+			EmployeeRequest fetchedEmployee = new Gson().fromJson(new Gson().toJson(sendPOST(url+getApi, data, header)), EmployeeRequest.class);
 			 
 			return fetchedEmployee;
 		}catch(Exception ee){
@@ -51,17 +60,21 @@ public class EmployeeServiceImpl extends DataAccessObject implements EmployeeSer
 	}
 
 	@Override
-	public List<Employee> getEmployees() {
+	public List<EmployeeRequest> getEmployees() {
 		Gson gson = new Gson();
 		String url = ip+port;
 		try{
 			
-			Response apiResponse = gson.fromJson(sendGET(url+getApi), Response.class);
+			Map<String, String> header = new HashMap<String, String>();
+			
+			header.put("token", "myToken");
+			
+			Response apiResponse = gson.fromJson(sendGET(url+getApi, header), Response.class);
 			
 			System.out.println("apiResponse = "+new Gson().toJson(apiResponse));
 			
 			if(apiResponse.getStatus().equals("200")){
-				List<Employee> employees = gson.fromJson(gson.toJson(apiResponse.getData()), List.class);
+				List<EmployeeRequest> employees = gson.fromJson(gson.toJson(apiResponse.getData()), List.class);
 				return employees;
 			}
 		}catch(Exception ee){

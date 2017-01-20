@@ -1,6 +1,9 @@
 var hostAddress="http://localhost:8989/cmsapp";
 var getHostByName ="/admin/host/gethost/";
-var getHosts = "/admin/host/gethosts"
+var getHosts = "/admin/host/gethosts";
+var pageCreate = "/admin/page/create/"
+var pageList = "/admin/page/get-pages/"	
+	
 
 function ajaxCallGet(url,method){
 	
@@ -61,10 +64,29 @@ $(document).ready(function(){
 	
 	$('#example').DataTable( {
         "ajax": hostAddress+getHosts,
+        "pageLength": 8,
         "columns": [
             { "data": "id" },
             { "data": "hostName" },
-            { "data": "aliasName" }
+            { "data": "aliasName" },
+            { "data": "pages",
+              "render": function ( data, type, full, meta ) {
+          	      return '<a href="'+hostAddress+pageList+full.hostName+'">'+(data.length!=null ?data.length:0)+'</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+          	    }	
+            },
+            { "data": "editableInfo.createdBy" },
+            { "data": "editableInfo.createdAt",
+              "render": function ( data, type, full, meta ) {
+            	      return new Date(data).toLocaleString();
+            	    }
+            },
+            { "data": "hostName",
+                "render": function ( data, type, full, meta ) {
+              	      return '<a title="Add New Page" href="'+hostAddress+pageCreate+data+'" class="glyphicon glyphicon-plus-sign"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+              	      		 '<a title="Edit Site" href="'+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+              	      		 '<a title="View Site" href="'+data+'" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+              	    } 	
+              },
         ]
     } );
 	

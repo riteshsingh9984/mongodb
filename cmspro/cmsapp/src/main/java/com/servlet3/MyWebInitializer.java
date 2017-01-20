@@ -6,7 +6,7 @@ import com.config.SpringMongoConfig1;
 import com.config.SpringWebConfig;
 
 public class MyWebInitializer extends
-		AbstractAnnotationConfigDispatcherServletInitializer {
+		AbstractAnnotationConfigDispatcherServletInitializer  {
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {

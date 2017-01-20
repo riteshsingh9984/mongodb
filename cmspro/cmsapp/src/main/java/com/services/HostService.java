@@ -3,13 +3,14 @@ package com.services;
 import java.io.IOException;
 import java.util.Set;
 
-import com.models.Host;
+import com.models.HostRequest;
+import com.models.HostResponse;
 
 public interface HostService {
 
-	public Host getHostByHostName(String hostName);
+	public HostResponse getHostByHostName(String hostName);
 	
-	public Set<Host> getHosts();
+	public Set<HostResponse> getHosts();
 	
 	public void save(Object host) throws IOException;
 }

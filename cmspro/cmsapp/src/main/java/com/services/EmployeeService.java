@@ -3,7 +3,7 @@ package com.services;
 import java.io.IOException;
 import java.util.List;
 
-import com.models.Employee;
+import com.models.EmployeeRequest;
 
 public interface EmployeeService {
 
@@ -11,5 +11,5 @@ public interface EmployeeService {
 	
 	public Object fetchEmployeeBySsn(Object employee) throws IOException;
 	
-	public List<Employee> getEmployees();
+	public List<EmployeeRequest> getEmployees();
 }

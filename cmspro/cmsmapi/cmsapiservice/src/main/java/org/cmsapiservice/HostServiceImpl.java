@@ -1,6 +1,8 @@
 package org.cmsapiservice;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,6 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.modelUtility.EditableInfo;
+import com.modelUtility.Page;
 import com.models.Host;
 
 import mongo.cmsrepository.HostRepository;
@@ -25,6 +29,16 @@ public class HostServiceImpl implements HostService {
 	public Host saveHost(Host host) {
 		
 		if(host != null){
+			if(host.getEditableInfo() == null){
+				EditableInfo editableInfo = new EditableInfo();
+				editableInfo.setCreatedAt();
+				editableInfo.setCreatedBy("Unkown-User");
+				host.setEditableInfo(editableInfo);
+				Set<Page> pages = new HashSet<Page>();
+				host.setPages(pages);
+			}else
+				host.getEditableInfo().setCreatedAt();
+			
 			return hostRepository.save(host);
 		}else
 			return null;

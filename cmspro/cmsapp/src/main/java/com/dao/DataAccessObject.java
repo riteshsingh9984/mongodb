@@ -13,7 +13,7 @@ public class DataAccessObject {
 	private URL obj = null;
 	private HttpURLConnection con = null ;
 	
-	protected String sendPOST(String url, String data) throws IOException {
+	protected String sendPOST(String url, String data, Map<String, String> header) throws IOException {
 		obj = new URL(url);
 		con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
@@ -49,7 +49,7 @@ public class DataAccessObject {
 		return "500";
 	}
 	
-	protected void sendPOST(String url, String data, Map<String, String> header) throws IOException {
+	protected void sendPOST1(String url, String data, Map<String, String> header) throws IOException {
 		obj = new URL(url);
 		con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
@@ -89,11 +89,18 @@ public class DataAccessObject {
 		}
 	}
 	
-	protected String sendGET(String url) throws IOException {
+	protected String sendGET(String url,  Map<String, String> header) throws IOException {
 		obj = new URL(url);
 		con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Data", "dfg");
+		
+		for (Map.Entry<String, String> entry : header.entrySet())
+		{
+			con.setRequestProperty(entry.getKey(), entry.getValue());
+		}
+		
+		
 		int responseCode = con.getResponseCode();
 		System.out.println("GET Response Code :: " + responseCode);
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success

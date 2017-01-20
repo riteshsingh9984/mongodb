@@ -1,14 +1,24 @@
 package com.models;
 
+import java.util.Set;
+
 import com.modelUtility.EditableInfo;
 
-public class Host {
+public class HostResponse {
 
-	private long id;
+private Long id;
+	
 	private String hostName;
 	private String aliasName;
+	private Set<PageResponse> pages;
 	private EditableInfo editableInfo;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getHostName() {
 		return hostName;
 	}
@@ -21,17 +31,16 @@ public class Host {
 	public void setAliasName(String aliasName) {
 		this.aliasName = aliasName;
 	}
+	public Set<PageResponse> getPages() {
+		return pages;
+	}
+	public void setPages(Set<PageResponse> pages) {
+		this.pages = pages;
+	}
 	public EditableInfo getEditableInfo() {
 		return editableInfo;
 	}
 	public void setEditableInfo(EditableInfo editableInfo) {
 		this.editableInfo = editableInfo;
 	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	
 }

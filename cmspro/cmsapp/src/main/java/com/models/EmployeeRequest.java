@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.joda.time.LocalDate;
 
 
-public class Employee {
+public class EmployeeRequest {
 
 	private int id;
 	
