@@ -57,6 +57,26 @@
 		src="/resources/anguler/js/myJs.js"></script>
 </div>
 
+<div th:fragment="createTemplateJsLoad">
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<script type="text/javascript"
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+
+
+	<script type="text/javascript"
+		th:src="@{/resources/anguler/js/createTemplate.js}"
+		src="/resources/anguler/js/createTemplate.js"></script>
+</div>
+
 <div th:fragment="jsLoadCreatePage">
 
 	<script

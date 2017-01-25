@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div th:replace="component :: cmsHeader"></div>
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<div id="addRows" class="btn btn-sm btn-info">Add Row</div>
+					</div>
+				</div>
+				<br/>
+				<div id="addCols" class="jumbotron">
+					<div class="row">
+						<div class="col-sm-3">
+							<span>Column</span>
+						</div>
+						<div class="col-sm-9 text-center">
+							<select id="colId" class="selectpicker">
+							  <option>100%</option>
+							  <option>33%-66%</option>
+							  <option>66%-33%</option>
+							  <option>33%-33%-33%</option>
+							  <option>25-75%</option>
+							  <option>75%-25%</option>
+							  <option>50%-50%</option>
+							  <option>25%-25%-25%-25%</option>
+							</select>				
+						</div>
+						<div class="col-sm-1 text-right">
+							<br/>
+							<div id="addRowsCols" class="btn btn-sm btn-info">Apply</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-sm-8">
+				<div class="" id="templateBody">
+					<div class="row jumbotron">
+						<div class="col-sm-12">Header</div>
+					</div>
+					<div id="tpb">
+						
+					</div>
+					<div class="row jumbotron">
+						<div class="col-sm-12">Footer</div>
+					</div>
+					
+					<div class="row text-center">
+						<div class="col-sm-4" >
+							<div id="userModeAction" class="btn btn-sm btn-info">User Mode</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="getHtmlAction" class="btn btn-sm btn-warning">Get-HTML</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="adminModeAction" class="btn btn-sm btn-success">Admin Mode</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<textarea id="myHtml" readonly rows="50" cols="10" class="form-control"></textarea>
+						</div>
+					</div> 
+					
+				</div>
+				<!-- <div class="container" id="templateBody">    
+					<div class="row jumbotron">
+						<div class="col-sm-12">Header</div>
+					</div>
+			        <div class="row full-border" > 
+			        	<div id="1template" class="col-sm-4 text-center full-border" > 
+			        		<div id="1btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>
+			        	</div>
+			        	<div id="2template" class="col-sm-4 text-center full-border" >
+			        		<div id="2btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>
+			        	</div>
+			        	<div id="3template" class="col-sm-4 text-center full-border" >
+			        		<div id="3btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>
+			        	</div>
+			        </div>
+			        <div class="row jumbotron">
+						<div class="col-sm-12">Footer</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-sm-4" >
+							<div id="userModeAction" class="btn btn-sm btn-info">User Mode</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="getHtmlAction" class="btn btn-sm btn-warning">Get-HTML</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="adminModeAction" class="btn btn-sm btn-success">Admin Mode</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<textarea id="myHtml" readonly rows="50" cols="10" class="form-control"></textarea>
+						</div>
+					</div> 
+					
+			    </div> -->
+		    </div>
+	    </div>
+	    </div>
+		<div th:replace="component :: createTemplateJsLoad"></div>
+	</body>
+</html>

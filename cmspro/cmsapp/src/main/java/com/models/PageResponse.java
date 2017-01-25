@@ -4,6 +4,7 @@ import com.modelUtility.EditableInfo;
 
 public class PageResponse {
 
+	private String hostName;
 	private String pageName;
 	private EditableInfo editableInfo;
 	private String templateName;
@@ -33,6 +34,10 @@ public class PageResponse {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	
+	public String getHostName() {
+		return hostName;
+	}
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
 }

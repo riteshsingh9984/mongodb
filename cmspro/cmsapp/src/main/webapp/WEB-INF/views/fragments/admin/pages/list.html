@@ -8,7 +8,7 @@
 <body>
 	<div th:replace="component :: cmsHeader"></div>
 	<div class="container">
-	<div class="message">
+		<div class="message">
 		<p><span class="lable-name">Host</span>
 			<span class="label-value" th:text="${data.hostName}">www.rockon.com</span>
 			<input type="hidden" id="myHost" th:value="${data.hostName}"  />	
@@ -24,10 +24,12 @@
 					<table id="example" class="display" cellspacing="0" width="100%">
 						<thead>
 							<tr>
+								<th>Host Name</th>
 								<th>Name</th>
 								<th>Template Name</th>
 								<th>CreatedBy</th>
 								<th>CreatedAt</th>
+								<th>Page Design</th>
 								<th>Action</th>
 							</tr>
 						</thead>

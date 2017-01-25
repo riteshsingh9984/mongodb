@@ -80,11 +80,13 @@ public class PageController {
 		return new Gson().toJson(data);
     }
 	
-	@RequestMapping(value = { "/page-design" }, method = RequestMethod.GET)
-	public ModelAndView pageDesign() throws IOException {
+	@RequestMapping(value = { "/page-design/{hostName}/{pageName}" }, method = RequestMethod.GET)
+	public ModelAndView pageDesign(@PathVariable("hostName")String hostName,@PathVariable("pageName")String pageName) throws IOException {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("template", "3col");
+		data.put("hostName", hostName);
+		data.put("pageName", pageName);
 		return new ModelAndView("admin/pages/pageDesign", "data", data);
 	}
 	

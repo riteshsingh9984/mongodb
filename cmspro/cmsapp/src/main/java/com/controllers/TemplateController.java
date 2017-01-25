@@ -22,4 +22,12 @@ public class TemplateController {
 		data.put("content", "Woowwwww");
 		return new ModelAndView("admin/templateBank/templates", "data", data);
 	}
+	
+	@RequestMapping(value = { "/createTemplate" }, method = RequestMethod.GET)
+	public ModelAndView formTemplate() throws IOException {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("content", "Woowwwww");
+		return new ModelAndView("admin/templateBank/create", "data", data);
+	}
 }

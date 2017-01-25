@@ -1,5 +1,6 @@
 var hostAddress="http://localhost:8989/cmsapp";
 var getPages = "/admin/page/getpages/";
+var pageDesign="/admin/page/page-design/"
 
 function ajaxCallGet(url,method){
 	
@@ -77,6 +78,8 @@ $(document).ready(function(){
 	$('#example').DataTable( {
         "ajax": hostAddress+getPages+$("#myHost").val(),
         "columns": [
+            { "data": "hostName",
+              "visible": false },
             { "data": "pageName" },
             { "data": "templateName" },
             { "data": "editableInfo.createdBy" },
@@ -85,6 +88,11 @@ $(document).ready(function(){
             	      return new Date(data).toLocaleString();
             	    }
             },
+            { "data": "hostName",
+              "render": function ( data, type, full, meta ) {
+          	      return '<a title="Page Design" href="'+hostAddress+pageDesign+full.hostName+'/'+full.pageName+'" class="">'+full.pageName+'</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+              	    } 	
+              },
             { "data": "pageName",
                 "render": function ( data, type, full, meta ) {
               	      return '<a title="Edit Site" href="'+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+

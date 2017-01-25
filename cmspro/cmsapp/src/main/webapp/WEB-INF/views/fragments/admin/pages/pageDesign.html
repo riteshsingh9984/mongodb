@@ -6,8 +6,24 @@
     <div th:replace="component :: title"></div>
 	</head>
 	<body>
-		<div th:replace="admin/templateBank/templates :: ${data.template}"></div>
-		
+		<div th:replace="component :: cmsHeader"></div>
+		<div class="container">
+			<div class="message">
+			<p><span class="lable-name">Page :</span>
+				<span class="label-value" th:text="${data.pageName}" >www.rockon.com</span>	
+			</p>
+			</div>
+			<div class="row ">
+				<div class="col-sm-12">
+					<div class="relative">
+						<div class="btn-actions">
+							<button title="Save Page Design" class="savePageDesign btn btn-default btn-circle-sm btn-primary"><span class="glyphicon glyphicon-hand-up"></span></button>			
+						</div>
+						<div th:replace="admin/templateBank/templates :: ${data.template}"></div>	
+					</div>		
+				</div>
+			</div>
+	
 		<div th:replace="component :: jsLoad"></div>
 	</body>
 </html>

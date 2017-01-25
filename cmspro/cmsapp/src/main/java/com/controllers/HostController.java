@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +73,7 @@ public class HostController {
 		return new ModelAndView("admin/host/list", "data", data);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "/gethosts", method = RequestMethod.GET)
     public @ResponseBody Object getHostList() {
 		Gson gson = new Gson();

@@ -11,7 +11,7 @@ public class Page {
 	
 	public Page(PageRequest pageRequest){
 		if(pageRequest != null){
-			if(pageRequest.getPageName()!=null)
+			if((pageRequest.getPageName()!=null))
 				this.pageName = pageRequest.getPageName();
 			if(pageRequest.getTemplateName()!=null)
 				this.templateName = pageRequest.getTemplateName();
