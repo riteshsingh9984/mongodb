@@ -47,7 +47,6 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 			Set<PageResponse> pages = hostResponse.getPages();
 			if(pages != null)
 				pages.stream().forEach(page -> page.setHostName(hostName));
-			
 			return pages;
 		}
 		

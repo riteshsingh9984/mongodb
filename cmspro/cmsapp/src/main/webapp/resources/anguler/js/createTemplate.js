@@ -27,9 +27,11 @@ $(document).ready(function(){
 		if($("#colId").val() == '100%'){
 		
 			var counter = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm  btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+counter+'template" class="col-sm-12 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+							 '</div>'+
+								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+counter+'template" class="col-sm-12 text-center " >'+
 								  		'<div id="'+counter+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  '</div>');
@@ -40,12 +42,14 @@ $(document).ready(function(){
 			var colCounter1 = rowsCount;
 			rowsCount++;
 			var colCounter2 = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm  btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-4 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+							 '</div>'+
+							 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-8 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-8 text-center " >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  '</div>');
@@ -56,12 +60,14 @@ $(document).ready(function(){
 			var colCounter1 = rowsCount;
 			rowsCount++;
 			var colCounter2 = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm  btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-8 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+							 '</div>'+
+								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-8 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center " >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  '</div>');
@@ -76,15 +82,17 @@ $(document).ready(function(){
 			rowsCount++;
 			var colCounter3 = rowsCount;
 			
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm  btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-4 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+							'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+						     '</div>'+
+								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center right-border" >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
-							  		'<div id="'+colCounter3+'template" class="col-sm-4 text-center full-border" >'+
+							  		'<div id="'+colCounter3+'template" class="col-sm-4 text-center" >'+
 						  				'<div id="'+colCounter3+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 						  			'</div>'+
 							  '</div>');
@@ -96,12 +104,14 @@ $(document).ready(function(){
 			var colCounter1 = rowsCount;
 			rowsCount++;
 			var colCounter2 = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-3 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+							     '</div>'+
+								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-3 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-9 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-9 text-center " >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  '</div>');
@@ -112,12 +122,14 @@ $(document).ready(function(){
 			var colCounter1 = rowsCount;
 			rowsCount++;
 			var colCounter2 = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-9 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+							'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+						     '</div>'+
+								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-9 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center " >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  '</div>');
@@ -128,12 +140,14 @@ $(document).ready(function(){
 			var colCounter1 = rowsCount;
 			rowsCount++;
 			var colCounter2 = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-6 text-center full-border" >'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+						     '</div>'+
+							 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								  	'<div id="'+colCounter1+'template" class="col-sm-6 text-center right-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-6 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-6 text-center " >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  '</div>');
@@ -150,18 +164,20 @@ $(document).ready(function(){
 			rowsCount++;
 			var colCounter4 = rowsCount;
 			
-			$("#tpb").append('<div id="'+colCounter1+'container" class="row full-border text-center text-center" >' +
-									'<div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
-								  	'<div id="'+colCounter1+'template" class="col-sm-3 text-center full-border" >'+
-								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+					          '</div>'+
+							  '<div id="'+colCounter1+'container" class="row full-border text-center text-center" >' +
+								  	'<div id="'+colCounter1+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info  rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center full-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center bottom-border right-border" >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
-							  		'<div id="'+colCounter3+'template" class="col-sm-3 text-center full-border" >'+
+							  		'<div id="'+colCounter3+'template" class="col-sm-3 text-center bottom-border right-border" >'+
 						  				'<div id="'+colCounter3+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 						  			'</div>'+
-						  			'<div id="'+colCounter4+'template" class="col-sm-3 text-center full-border" >'+
+						  			'<div id="'+colCounter4+'template" class="col-sm-3 text-center bottom-border " >'+
 					  					'<div id="'+colCounter4+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 					  				'</div>'+
 							  '</div>');
@@ -175,14 +191,17 @@ $(document).ready(function(){
 	$( document ).on( 'click', '.removeclass', function(event) {
 		var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"container";
 		$("#"+makeId).remove();
+		
+		makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"removebtn";
+		$("#"+makeId).remove();
 		});
 	
 	/*Adding Container in Template*/
 	/*$(".addtemplateContainer").bind("click", function(event){*/
 	$( document ).on( 'click', '.addtemplateContainer', function(event) {
         var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn")))+"template";
-        $("#"+makeId).prepend("<div class='row' id='"+count+"content'>" +
-        			"<div class='col-sm-12 full-border'>" +
+        $("#"+makeId).append("<div class='row' id='"+count+"content'>" +
+        			"<div class='col-sm-12 bottom-border'>" +
         				"<div class='rmadmin'>" +
 	        				"<div class='row'>" +
 	        					"<div class='col-sm-6'>" +
@@ -270,6 +289,29 @@ $(document).ready(function(){
 	/*Make view in adminMode*/
 	$( document ).on( 'click', '#adminModeAction', function(event) {
 		   $( ".rmadmin").show();
+		});
+	
+	
+	
+	/*Demo*/
+	$('#lstFruits').multiselect({
+        includeSelectAllOption: true
+    });
+	
+	$( document ).on( 'change', '#lstFruits', function(event) {
+		var selected = $("#lstFruits option:selected");
+        var message = "";
+        selected.each(function () {
+            /*message += $(this).text() + "," + $(this).val() + "\n";*/
+        	message += $(this).text() + ",";
+        });
+        alert(message);
+        message = message.substring(0,message.length - 1)
+        
+        alert(message);
+        
+        $("#dataText").val(message);
+        
 		});
 	
 });
