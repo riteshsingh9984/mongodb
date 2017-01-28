@@ -282,8 +282,9 @@ $(document).ready(function(){
 	
 	/*Get Pure Html*/
 	$( document ).on( 'click', '#getHtmlAction', function(event) {
-		   alert($('#templateBody').html());
+		  
 		   $('#myHtml').val($('#templateBody').html());
+		   $('#myHtmlView').text($('#templateBody').html());
 		});
 	
 	/*Make view in adminMode*/
@@ -291,7 +292,15 @@ $(document).ready(function(){
 		   $( ".rmadmin").show();
 		});
 	
-	
+	/*copy snippet html code*/
+	$( document ).on( 'click', '#btncopy', function(event) {
+		   
+		var $temp = $("<input>");
+		  $("body").append($temp);
+		  $temp.val($("#myHtmlView").text()).select();
+		  document.execCommand("copy");
+		  $temp.remove();
+	});
 	
 	/*Demo*/
 	$('#lstFruits').multiselect({

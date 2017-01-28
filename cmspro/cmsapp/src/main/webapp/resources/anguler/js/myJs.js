@@ -94,6 +94,7 @@ $(document).ready(function(){
 	$( document ).on( 'click', '#getHtmlAction', function(event) {
 		   alert($('#templateBody').html());
 		   $('#myHtml').val($('#templateBody').html());
+		   
 		});
 	
 	/*Make view in adminMode*/
