@@ -1,5 +1,7 @@
 var hostAddress="http://localhost:8989/cmsapp";
 var getTemplateByName ="/admin/templates/gettemplate/";
+var getTemplates = "/admin/templates/gettemplates";
+var getTemplateView = "/admin/templates/view/"
 
 function ajaxCallGet(url,method){
 	
@@ -368,5 +370,27 @@ $(document).ready(function(){
 			
 			
 		});
+	
+	$('#example').DataTable( {
+        "ajax": hostAddress+getTemplates,
+        "pageLength": 8,
+        "columns": [
+            { "data": "id" },
+            { "data": "templateName" },
+            { "data": "editableInfo.createdBy" },
+            { "data": "editableInfo.createdAt",
+              "render": function ( data, type, full, meta ) {
+            	      return new Date(data).toLocaleString();
+            	    }
+            },
+            { "data": "templateName",
+                "render": function ( data, type, full, meta ) {
+              	      return '<a title="Edit Site" href="'+hostAddress+getTemplateByName+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+              	      		 '<a title="View Site" href="'+hostAddress+getTemplateView+data+'" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+              	    } 	
+              },
+        ]
+    } );
+	
 	
 });
