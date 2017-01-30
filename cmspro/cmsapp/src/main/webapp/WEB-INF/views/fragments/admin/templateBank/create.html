@@ -10,6 +10,17 @@
 		<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-4">
+			<form id="myTemplateForm" action="#" th:action="@{/admin/templates/save}" method="post">
+				
+				<div class="row">
+					<div class="col-sm-6 text-right">
+						<span>Template Name</span>
+					</div>
+					<div class="col-sm-62 text-left">
+						<input type="text" name="templateName" id="templateName" />
+					</div>
+				</div>
+				<br/>
 				<div class="row">
 					<div class="col-sm-12 text-center">
 						<div id="addRows" class="btn btn-sm btn-info">Add Row</div>
@@ -53,6 +64,12 @@
 				</div>
 				<br/>
 				<div class="row">
+					<div class="col-sm-12 text-center">
+						<div class="btn btn-success btn-sm" id="savetemplate">save</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
 					<div class="col-sm-12 text-right">
 						<div id="btncopy" class="btn btn-sm btn-info">copy-code</div>
 					</div>
@@ -60,10 +77,10 @@
 				<div class="row">
 						<div class="col-sm-12">
 							<code id="myHtmlView" style=display:block;white-space:pre-wrap>...</code>
-							<input type="hidden" id="myHtml"  class="form-control"/> 
+							<input type="hidden" name="content" id="myHtml"  class="form-control"/> 
 						</div>
 				</div>
-				
+				</form>
 			</div>
 			<div class="col-sm-8">
 				<div class="row jumbotron">

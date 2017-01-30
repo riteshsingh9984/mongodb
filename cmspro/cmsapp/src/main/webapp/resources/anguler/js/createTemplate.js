@@ -1,12 +1,71 @@
-var app = angular.module("myApp", []);
-app.directive("w3TestDirective", function() {
-    return {
-        template : "I was made in a directive constructor!"
-    };
-});
+var hostAddress="http://localhost:8989/cmsapp";
+var getTemplateByName ="/admin/templates/gettemplate/";
+
+function ajaxCallGet(url,method){
+	
+	var resultData;
+	var request = $.ajax({
+		  url: url,
+		  type: method,
+		  async: false,
+		  cache: false,
+		  timeout: 30000,
+		  dataType: "html"
+		});
+
+		request.done(function(msg) {
+		  resultData = msg;
+		});
+		
+		request.fail(function(jqXHR, textStatus) {
+		  alert( "Request failed: " + textStatus );
+		});
+	return resultData;
+}
+
+function ajaxCallPost(url,method,data){
+	
+	var resultData;
+	var request = $.ajax({
+		  url: url,
+		  type: method,
+		  data : data,
+		  async: false,
+		  cache: false,
+		  timeout: 30000,
+		  dataType: "html"
+		});
+
+		request.done(function(msg) {
+		  resultData = msg;
+		});
+		
+		request.fail(function(jqXHR, textStatus) {
+		  alert( "Request failed: " + textStatus );
+		});
+	return resultData;
+}
+
+
+
+
 var count = 1;
 var rowsCount = 0;
 $(document).ready(function(){
+	
+	
+	$("#templateName").blur(function(event){
+		alert("Saud");
+		var yourTemplate = event.target.value;
+        var tool = ajaxCallGet(hostAddress+getTemplateByName+event.target.value,"GET");
+        if(tool == 'FOUND'){
+        	$( "#templateName" ).val('');
+        	$("#templateName").attr("placeholder", yourTemplate+" not available..! ");
+        	$('#templateName').addClass('placeholder-color');
+        }
+    });
+	
+	
 	
 	$( "#addCols").hide();
 	$( "#act").hide();
@@ -283,7 +342,6 @@ $(document).ready(function(){
 	/*Get Pure Html*/
 	$( document ).on( 'click', '#getHtmlAction', function(event) {
 		  
-		   $('#myHtml').val($('#templateBody').html());
 		   $('#myHtmlView').text($('#templateBody').html());
 		});
 	
@@ -302,25 +360,13 @@ $(document).ready(function(){
 		  $temp.remove();
 	});
 	
-	/*Demo*/
-	$('#lstFruits').multiselect({
-        includeSelectAllOption: true
-    });
-	
-	$( document ).on( 'change', '#lstFruits', function(event) {
-		var selected = $("#lstFruits option:selected");
-        var message = "";
-        selected.each(function () {
-            /*message += $(this).text() + "," + $(this).val() + "\n";*/
-        	message += $(this).text() + ",";
-        });
-        alert(message);
-        message = message.substring(0,message.length - 1)
-        
-        alert(message);
-        
-        $("#dataText").val(message);
-        
+	/*Save Template*/
+	$( document ).on( 'click', '#savetemplate', function(event) {
+		
+		$('#myHtml').val($('#templateBody').html());
+		$("#myTemplateForm").submit();
+			
+			
 		});
 	
 });
