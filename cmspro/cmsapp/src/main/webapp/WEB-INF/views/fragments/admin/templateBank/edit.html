@@ -96,15 +96,25 @@
 		<div th:replace="component :: jsLoadViewTemplate"></div>
 		<script th:inline="javascript">
 		
-		var count = ($('.full-border').length)+1;
+		var count = 0;
+		var max = 0;
 		var rowsCount = 0;
 			$(document).ready(function(){
+				
+				var makeId;
+				$.each($('.full-border'), function() {
+				    makeId = ((this.id).substring(0,(this.id).indexOf("container")));
+				    if(max < makeId)
+				    	max= makeId;
+				});
+				count = max+1;
+				max = 0;
+				
 				var content = /*[[${data.template.content}]]*/ 'hello';
 				$("#templateBody").html(content);
 				
 				$( "#addCols").hide();
 				$( "#act").hide();
-				
 				
 				/*Save Template*/
 				$( document ).on( 'click', '#savetemplate', function(event) {
@@ -124,8 +134,8 @@
 				/*Column Select-Box Apply*/
 				$( document ).on( 'click', '#addRowsCols', function(event) {
 					   
-					rowsCount = $('.full-border').length;
-					rowsCount = rowsCount+4;
+					rowsCount = count;
+					
 					$( "#addCols").hide();
 					$( "#act").hide();
 					

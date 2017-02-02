@@ -86,6 +86,9 @@ public class TemplateController {
 	public ModelAndView update(@ModelAttribute("hostSave") TemplateRequest templateRequest, BindingResult result,
 			HttpServletRequest request) throws Exception {
 		System.out.println("Template Details : " + new Gson().toJson(templateRequest));
+		
+		TemplateResponse templateResponse = templateService.getTemplateByTemplateName(templateRequest.getTemplateName());
+		templateRequest.setId(templateResponse.getId());
 		try {
 			templateService.update(templateRequest);
 		} catch (Exception ex) {
