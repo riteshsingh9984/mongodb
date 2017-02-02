@@ -63,7 +63,36 @@ public class TemplateController {
 			ex.printStackTrace();
 		}
 		Map<String, Object> data = new HashMap<String, Object>();
-		return new ModelAndView("admin/templateBank/create", "data", data);
+		return new ModelAndView("admin/templateBank/list", "data", data);
+	}
+	
+	@RequestMapping(value = { "/edit/{templateName}" }, method = RequestMethod.GET)
+	public ModelAndView formEditTemplate(@PathVariable("templateName") String templateName) throws IOException {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		TemplateResponse templateResponse = null;
+		try{
+			templateResponse = templateService.getTemplateByTemplateName(templateName);
+			
+			System.out.println("con= "+templateResponse.getContent());
+			
+		}catch(Exception ee){}
+		
+		data.put("template", templateResponse);
+		return new ModelAndView("admin/templateBank/edit", "data", data);
+	}
+	
+	@RequestMapping(value = { "/update" }, method = RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute("hostSave") TemplateRequest templateRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		System.out.println("Template Details : " + new Gson().toJson(templateRequest));
+		try {
+			templateService.update(templateRequest);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		return new ModelAndView("admin/templateBank/list", "data", data);
 	}
 	
 	@RequestMapping(value = "/gettemplate/{templateName}", method = RequestMethod.GET)

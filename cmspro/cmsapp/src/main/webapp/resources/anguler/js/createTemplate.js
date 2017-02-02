@@ -2,6 +2,7 @@ var hostAddress="http://localhost:8989/cmsapp";
 var getTemplateByName ="/admin/templates/gettemplate/";
 var getTemplates = "/admin/templates/gettemplates";
 var getTemplateView = "/admin/templates/view/"
+var getTemplateUpdate = "/admin/templates/edit/"	
 
 function ajaxCallGet(url,method){
 	
@@ -88,10 +89,10 @@ $(document).ready(function(){
 		if($("#colId").val() == '100%'){
 		
 			var counter = rowsCount;
-			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
-								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+			$("#tpb").append('<div id="'+counter+'removebtn" class="row  rmadmin text-center">' +
+								'<br/><div id="'+counter+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 							 '</div>'+
-								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+								'<div id="'+counter+'container" class="row full-border text-center" >' +
 								'<div id="'+counter+'template" class="col-sm-12 text-center " >'+
 								  		'<div id="'+counter+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
@@ -385,7 +386,7 @@ $(document).ready(function(){
             },
             { "data": "templateName",
                 "render": function ( data, type, full, meta ) {
-              	      return '<a title="Edit Site" href="'+hostAddress+getTemplateByName+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+              	      return '<a title="Edit Site" href="'+hostAddress+getTemplateUpdate+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
               	      		 '<a title="View Site" href="'+hostAddress+getTemplateView+data+'" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
               	    } 	
               },

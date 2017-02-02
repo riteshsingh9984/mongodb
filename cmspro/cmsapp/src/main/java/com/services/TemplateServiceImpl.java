@@ -25,6 +25,9 @@ public class TemplateServiceImpl extends DataAccessObject implements TemplateSer
 	@Value("${save.template.api}")
 	private String saveTemplateApi;
 	
+	@Value("${update.template.api}")
+	private String updateTemplateApi;
+	
 	@Value("${ip}")
 	private String ip;
 	
@@ -81,5 +84,17 @@ public class TemplateServiceImpl extends DataAccessObject implements TemplateSer
 		header.put("token", "myToken");
 		
 		sendPOST(url+saveTemplateApi, data, header);
+	}
+	
+	@Override
+	public void update(Object template) throws IOException {
+		String url = ip+port;
+		String data = new Gson().toJson(template);
+		
+		Map<String, String> header = new HashMap<String, String>();
+		
+		header.put("token", "myToken");
+		
+		sendPOST(url+updateTemplateApi, data, header);
 	}
 }

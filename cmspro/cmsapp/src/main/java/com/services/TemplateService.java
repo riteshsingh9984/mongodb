@@ -12,4 +12,6 @@ public TemplateResponse getTemplateByTemplateName(String templateName);
 	public Set<TemplateResponse> getTemplates();
 	
 	public void save(Object template) throws IOException;
+	
+	public void update(Object template) throws IOException;
 }

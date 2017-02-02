@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div th:replace="component :: cmsHeader"></div>
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+			<form id="myTemplateForm" action="#" th:action="@{/admin/templates/update}" method="post">
+				
+				<div class="row">
+					<div class="col-sm-6 text-right">
+						<span>Template Name</span>
+					</div>
+					<div class="col-sm-62 text-left">
+						<input type="text" name="templateName" id="templateName" th:value="${data.template.templateName}" readonly />
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-sm-6 text-center">
+						<div id="addRows" class="btn btn-sm btn-info">Add Row</div>
+					</div>
+					<div class="col-sm-6 text-center">
+						<div class="btn btn-sm btn-success" id="savetemplate">&nbsp;save&nbsp;&nbsp;</div>
+					</div>
+				</div>
+				<br/>
+				<div id="addCols" class="jumbotron">
+					<div class="row">
+						<div class="col-sm-3">
+							<span>Column</span>
+						</div>
+						<div class="col-sm-9 text-center">
+							<select id="colId" class="selectpicker">
+							  <option>100%</option>
+							  <option>33%-66%</option>
+							  <option>66%-33%</option>
+							  <option>33%-33%-33%</option>
+							  <option>25-75%</option>
+							  <option>75%-25%</option>
+							  <option>50%-50%</option>
+							  <option>25%-25%-25%-25%</option>
+							</select>				
+						</div>
+						<div class="col-sm-1 text-right">
+							<br/>
+							<div id="addRowsCols" class="btn btn-sm btn-info">Apply</div>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row text-center">
+						<div class="col-sm-4" >
+							<div id="userModeAction" class="btn btn-sm btn-info hidden">User Mode</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="getHtmlAction" class="btn btn-sm btn-warning hidden">Get-HTML</div>
+						</div>
+						<div class="col-sm-4" >
+							<div id="adminModeAction" class="btn btn-sm btn-success hidden">Admin Mode</div>	
+						</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-sm-12 text-right">
+						<div id="btncopy" class="btn btn-sm btn-info hidden">copy-code</div>
+					</div>
+				</div>
+				<div class="row">
+						<div class="col-sm-12">
+							<code id="myHtmlView" class="hidden" style=display:block;white-space:pre-wrap>...</code>
+							<input type="hidden" name="content" id="myHtml"  class="form-control"/> 
+						</div>
+				</div>
+				</form>
+			</div>
+			<div class="col-sm-8">
+				<div class="row jumbotron">
+					<div class="col-sm-12">Header</div>
+				</div>
+				<div class="col-sm-12" id="templateBody">
+		        	[[${data.template.content}]]		
+		        </div>
+				<div class="row jumbotron">
+					<div class="col-sm-12">Footer</div>
+				</div>
+				
+		    </div>
+	    </div>
+	    </div>
+		<div th:replace="component :: jsLoadViewTemplate"></div>
+		<script th:inline="javascript">
+		
+		var count = ($('.full-border').length)+1;
+		var rowsCount = 0;
+			$(document).ready(function(){
+				var content = /*[[${data.template.content}]]*/ 'hello';
+				$("#templateBody").html(content);
+				
+				$( "#addCols").hide();
+				$( "#act").hide();
+				
+				
+				/*Save Template*/
+				$( document ).on( 'click', '#savetemplate', function(event) {
+					
+					$('#myHtml').val($('#templateBody').html());
+					$("#myTemplateForm").submit();
+						
+						
+					});
+				
+				/*Column Select-Box*/
+				$( document ).on( 'click', '#addRows', function(event) {
+					   $( "#addCols").show();
+					});
+				
+				
+				/*Column Select-Box Apply*/
+				$( document ).on( 'click', '#addRowsCols', function(event) {
+					   
+					rowsCount = $('.full-border').length;
+					rowsCount = rowsCount+4;
+					$( "#addCols").hide();
+					$( "#act").hide();
+					
+					if($("#colId").val() == '100%'){
+					
+						var colCounter1 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+										 '</div>'+
+											'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-12 text-center " >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  '</div>');
+					}
+					
+					if($("#colId").val() == '33%-66%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+										 '</div>'+
+										 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-8 text-center " >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '66%-33%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+										 '</div>'+
+											'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-8 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center " >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '33%-33%-33%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						rowsCount++;
+						var colCounter3 = rowsCount;
+						
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+										'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+									     '</div>'+
+											'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center right-border" >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  		'<div id="'+colCounter3+'template" class="col-sm-4 text-center" >'+
+									  				'<div id="'+colCounter3+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+									  			'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '25-75%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+										     '</div>'+
+											'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-3 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-9 text-center " >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '75%-25%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+										'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+									     '</div>'+
+											'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											'<div id="'+colCounter1+'template" class="col-sm-9 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center " >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '50%-50%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+									     '</div>'+
+										 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
+											  	'<div id="'+colCounter1+'template" class="col-sm-6 text-center right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-6 text-center " >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  '</div>');
+					}
+					
+					if($("#colId").val() == '25%-25%-25%-25%'){
+						
+						var colCounter1 = rowsCount;
+						rowsCount++;
+						var colCounter2 = rowsCount;
+						rowsCount++;
+						var colCounter3 = rowsCount;
+						rowsCount++;
+						var colCounter4 = rowsCount;
+						
+						$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
+											'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
+								          '</div>'+
+										  '<div id="'+colCounter1+'container" class="row full-border text-center text-center" >' +
+											  	'<div id="'+colCounter1+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+											  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info  rmadmin addtemplateContainer">Add-container</div>'+
+											  	'</div>'+
+											  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+										  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+										  		'</div>'+
+										  		'<div id="'+colCounter3+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+									  				'<div id="'+colCounter3+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+									  			'</div>'+
+									  			'<div id="'+colCounter4+'template" class="col-sm-3 text-center bottom-border " >'+
+								  					'<div id="'+colCounter4+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
+								  				'</div>'+
+										  '</div>');
+					}
+					
+					
+					}); 
+				
+				/*Make view in adminMode*/
+				$( document ).on( 'click', '.removeclass', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"container";
+					$("#"+makeId).remove();
+					
+					makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"removebtn";
+					$("#"+makeId).remove();
+					});
+				
+				/*Adding Container in Template*/
+				/*$(".addtemplateContainer").bind("click", function(event){*/
+				$( document ).on( 'click', '.addtemplateContainer', function(event) {
+			        var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn")))+"template";
+			        $("#"+makeId).append("<div class='row' id='"+count+"content'>" +
+			        			"<div class='col-sm-12 bottom-border'>" +
+			        				"<div class='rmadmin'>" +
+				        				"<div class='row'>" +
+				        					"<div class='col-sm-6'>" +
+				        						"<select id='"+count+"chooseElement' class='form-control choose-element'>" +
+					        						"<option>Lebel</option>" +
+					        						"<option>Pargraph</option>" +
+					        						"<option>Image</option>" +
+					        						"<option>Slide</option>" +
+					        						"<option>Ritch-Text</option>"+
+				        						"</select>" +
+				        					"</div>" +
+				        					"<div class='col-sm-6 text-right'>" +
+				        						"<div id='"+count+"contentRemoveAction' class='contentRemoveAction btn btn-sm btn-danger glyphicon glyphicon-remove'></div>" +
+				        					"</div>" +
+				        				"</div>" +
+				        				"<div id='"+count+"selectBox' class='row'>" +
+				        				"</div>" +
+				        			"</div>" +
+			        				"<div id='"+count+"contentElement'><h1>HellO</h1></div>" +
+			        			"</div>" +
+			        		"</div>");
+			        count++ ;
+			    });
+				
+				/*Removing Container From Template*/
+				$( document ).on( 'click', '.contentRemoveAction', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentRemoveAction")))+"content";
+					   $( "#"+makeId ).remove();
+					});
+				
+				/*Adding Container From Template*/
+				$( document ).on( 'click', '.contentAddAction', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentAddAction")))+"content";
+					   alert("It's works"+makeId);
+					   $("#"+makeId).append("<div>Cool</div>");
+					});
+				
+				/*Choose element from select-Box for template-content*/
+				$( document ).on( 'click', '.choose-element', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("chooseElement")))+"contentElement";  
+					var makeValue = event.target.value;
+					var idData = ((event.target.id).substring(0,(event.target.id).indexOf("chooseElement")));
+					$('#'+makeId).html('<h3>cool..!<h3>');
+					var selectId = ((event.target.id).substring(0,(event.target.id).indexOf("chooseElement")))+"selectBox";
+					
+					if(event.target.value == 'Pargraph'){
+						var selectDataId = idData+"selectBox";
+						$("#"+selectDataId).show();
+						
+						$('#'+selectId).html("<div class='col-sm-10 full-border'>" +
+								"<div id='"+idData+"selectBoxElement' >" +
+										"<textarea id='"+idData+"elementData' rows='4' cols='50'>"+
+										"Enter text here...</textarea>" +
+								"</div>" +
+								"</div>" +
+								"<div class='col-sm-2'>" +
+									"<div id='"+idData+"selectBoxApply' class='selectBoxApply btn btn-sm btn-warning'>Apply</div>" +
+								"</div>");
+						}
+					});
+				
+				/*Select-Box Apply button*/
+				$( document ).on( 'click', '.selectBoxApply', function(event) {
+					var selectBoxId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+"selectBox";
+					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+"elementData";
+					var contentElementId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+"contentElement";
+					
+					$('#'+contentElementId).html($("#"+elementDataId).val());
+					$("#"+selectBoxId).html('');
+					});
+				
+			});
+		</script>
+	</body>
+</html>

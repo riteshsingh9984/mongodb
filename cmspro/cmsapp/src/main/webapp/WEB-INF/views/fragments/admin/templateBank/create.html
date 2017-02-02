@@ -22,8 +22,11 @@
 				</div>
 				<br/>
 				<div class="row">
-					<div class="col-sm-12 text-center">
+					<div class="col-sm-6 text-center">
 						<div id="addRows" class="btn btn-sm btn-info">Add Row</div>
+					</div>
+					<div class="col-sm-6 text-center">
+						<div class="btn btn-sm btn-success" id="savetemplate">&nbsp;save&nbsp;&nbsp;</div>
 					</div>
 				</div>
 				<br/>
@@ -50,33 +53,27 @@
 						</div>
 					</div>
 				</div>
-				<br/><br/><br/><br/><br/>
+				<br/>
 				<div class="row text-center">
 						<div class="col-sm-4" >
-							<div id="userModeAction" class="btn btn-sm btn-info">User Mode</div>
+							<div id="userModeAction" class="btn btn-sm btn-info hidden">User Mode</div>
 						</div>
 						<div class="col-sm-4" >
-							<div id="getHtmlAction" class="btn btn-sm btn-warning">Get-HTML</div>
+							<div id="getHtmlAction" class="btn btn-sm btn-warning hidden">Get-HTML</div>
 						</div>
 						<div class="col-sm-4" >
-							<div id="adminModeAction" class="btn btn-sm btn-success">Admin Mode</div>	
+							<div id="adminModeAction" class="btn btn-sm btn-success hidden">Admin Mode</div>	
 						</div>
-				</div>
-				<br/>
-				<div class="row">
-					<div class="col-sm-12 text-center">
-						<div class="btn btn-success btn-sm" id="savetemplate">save</div>
-					</div>
 				</div>
 				<br/>
 				<div class="row">
 					<div class="col-sm-12 text-right">
-						<div id="btncopy" class="btn btn-sm btn-info">copy-code</div>
+						<div id="btncopy" class="btn btn-sm btn-info hidden">copy-code</div>
 					</div>
 				</div>
 				<div class="row">
 						<div class="col-sm-12">
-							<code id="myHtmlView" style=display:block;white-space:pre-wrap>...</code>
+							<code id="myHtmlView" class="hidden" style=display:block;white-space:pre-wrap>...</code>
 							<input type="hidden" name="content" id="myHtml"  class="form-control"/> 
 						</div>
 				</div>
