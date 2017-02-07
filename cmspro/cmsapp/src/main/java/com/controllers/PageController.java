@@ -26,7 +26,9 @@ import com.google.gson.Gson;
 import com.models.HostResponse;
 import com.models.PageRequest;
 import com.models.PageResponse;
+import com.models.TemplateResponse;
 import com.services.PageService;
+import com.services.TemplateService;
 
 @Controller
 @ComponentScan("com.services, com.repo")
@@ -37,11 +39,21 @@ public class PageController {
 	@Qualifier("pageService")
 	private PageService pageService;
 	
+	@Autowired
+	@Qualifier("templateService")
+	private TemplateService templateService;
+	
 	@RequestMapping(value = { "/create/{hostName}" }, method = RequestMethod.GET)
 	public ModelAndView form(@PathVariable("hostName") String hostName) throws IOException {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("hostName", hostName);
+		
+		/*List<TemplateResponse> templates = new ArrayList<TemplateResponse>();
+		*/
+		Set<TemplateResponse> templates= templateService.getTemplates();
+		
+		data.put("templates", templates);
 		
 		return new ModelAndView("admin/pages/create", "data", data);
 	}
@@ -51,7 +63,15 @@ public class PageController {
 			HttpServletRequest request) throws Exception {
 		System.out.println("Page Details : " + new Gson().toJson(page));
 		try {
-			pageService.save(page);
+			
+			if(page != null){
+			TemplateResponse template = templateService.getTemplateByTemplateName(page.getTemplateName());
+				if(template != null){
+					page.setContent(template.getContent());
+					System.out.println("Page Details Data : " + new Gson().toJson(page));
+					pageService.save(page);
+				}
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -59,6 +79,64 @@ public class PageController {
 		data.put("hostName", page.getHostName());
 		
 		return new ModelAndView("admin/pages/list", "data", data);
+	}
+	
+	@RequestMapping(value = { "/page-design/{pageName}/host/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView formPageDesign(@PathVariable("pageName") String pageName, @PathVariable("hostName") String hostName) throws IOException {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		PageResponse pageResponse = null;
+		try{
+			pageResponse = pageService.getPageByPageName(pageName,hostName);
+			
+			System.out.println("con= "+pageResponse.getContent());
+			
+		}catch(Exception ee){}
+		
+		data.put("page", pageResponse);
+		return new ModelAndView("admin/pages/pageDesign", "data", data);
+	}
+	
+	@RequestMapping(value = { "/update" }, method = RequestMethod.POST)
+	public ModelAndView savePageDesign(@ModelAttribute("hostSave") PageRequest page, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		System.out.println("Page Details : " + new Gson().toJson(page));
+		try {
+			
+			if(page != null){
+			PageResponse pageResponse = pageService.getPageByPageName(page.getPageName(), page.getHostName());
+				if(pageResponse != null){
+					PageRequest pageRequest = new PageRequest();
+					pageRequest.setHostName(pageResponse.getHostName());
+					pageRequest.setPageName(pageResponse.getPageName());
+					pageRequest.setContent(page.getContent());
+					System.out.println("Page Details Data : " + new Gson().toJson(page));
+					pageService.update(page);
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("hostName", page.getHostName());
+		
+		return new ModelAndView("admin/pages/list", "data", data);
+	}
+	
+	@RequestMapping(value = { "/preview/{pageName}/host/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView formPageDesignPreview(@PathVariable("pageName") String pageName, @PathVariable("hostName") String hostName) throws IOException {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		PageResponse pageResponse = null;
+		try{
+			pageResponse = pageService.getPageByPageName(pageName,hostName);
+			
+			System.out.println("con= "+pageResponse.getContent());
+			
+		}catch(Exception ee){}
+		
+		data.put("page", pageResponse);
+		return new ModelAndView("admin/pages/preview", "data", data);
 	}
 	
 	@RequestMapping(value = { "/get-pages/{hostName}" }, method = RequestMethod.GET)

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div th:replace="component :: cmsHeader"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<div class="row jumbotron">
+					<div class="col-sm-12">Header</div>
+				</div>
+				<div id="templateBody"></div>
+				<div class="row jumbotron">
+					<div class="col-sm-12">Footer</div>
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="pageList"></div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="pageDesign"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+	<script th:inline="javascript">
+		var hostAddress = "http://localhost:8989/cmsapp";
+
+		$(document)
+				.ready(
+						function() {
+
+							var content = /*[[${data.page.content}]]*/'hello';
+							var hostName = /*[[${data.page.hostName}]]*/'hello';
+							var pageName = /*[[${data.page.pageName}]]*/'hello';
+
+							$("#templateBody").html(content);
+							$(".rmadmin").hide();
+							$("#pageDesign")
+									.html(
+											"<a href='"+hostAddress+"/admin/page/page-design/"+pageName+"/host/"+hostName+"' class='btn btn-sm btn-info '>&nbsp;Design&nbsp;&nbsp;</a>");
+							$("#pageList")
+									.html(
+											"<a href='"+hostAddress+"/admin/page/get-pages/"+hostName+"' class='btn btn-sm btn-success '>PageList</a>");
+						});
+	</script>
+</body>
+</html>

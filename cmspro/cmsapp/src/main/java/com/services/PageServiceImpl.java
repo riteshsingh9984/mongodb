@@ -23,6 +23,9 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 	@Value("${save.page.api}")
 	private String savePageApi;
 	
+	@Value("${update.page.api}")
+	private String updatePageApi;
+	
 	@Value("${ip}")
 	private String ip;
 	
@@ -34,8 +37,20 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 	private HostService hostService;
 	
 	@Override
-	public PageResponse getPageByPageName(String pageName) {
-		// TODO Auto-generated method stub
+	public PageResponse getPageByPageName(String pageName, String hostName) {
+		PageResponse pageResponse = null;
+		HostResponse hostResponse = hostService.getHostByHostName(hostName);
+		if((hostResponse!=null) && (hostResponse.getPages() != null )){
+			Set<PageResponse> pages = hostResponse.getPages();
+			if(pages != null)
+				pageResponse = pages.stream()
+									.filter(page-> pageName.equals(page.getPageName()))
+									.findAny()
+									.orElse(null);
+			pageResponse.setHostName(hostName);
+			return pageResponse;
+		}
+		
 		return null;
 	}
 
@@ -62,6 +77,17 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 		header.put("token", "myToken");
 		
 		sendPOST(url+savePageApi, data, header);
+	}
+	
+	@Override
+	public void update(Object pageRequest) throws IOException {
+		
+		String url = ip+port;
+		String data = new Gson().toJson(pageRequest);
+		Map<String, String> header = new HashMap<String, String>();
+		header.put("token", "myToken");
+		
+		sendPOST(url+updatePageApi, data, header);
 	}
 
 }

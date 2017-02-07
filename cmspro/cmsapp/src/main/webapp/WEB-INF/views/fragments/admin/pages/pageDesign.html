@@ -1,29 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head> 
-    <div th:replace="component :: cssLoad"></div>
-    
-    <div th:replace="component :: title"></div>
-	</head>
-	<body>
-		<div th:replace="component :: cmsHeader"></div>
-		<div class="container">
-			<div class="message">
-			<p><span class="lable-name">Page :</span>
-				<span class="label-value" th:text="${data.pageName}" >www.rockon.com</span>	
-			</p>
-			</div>
-			<div class="row ">
-				<div class="col-sm-12">
-					<div class="relative">
-						<div class="btn-actions">
-							<button title="Save Page Design" class="savePageDesign btn btn-default btn-circle-sm btn-primary"><span class="glyphicon glyphicon-hand-up"></span></button>			
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div th:replace="component :: cmsHeader"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1">
+				<form id="myTemplateForm" action="#"
+					th:action="@{/admin/page/update}" method="post">
+
+					<div class="row">
+						<div class="col-sm-62 text-center">
+							<div class="btn btn-sm btn-success" id="savetemplate">&nbsp;Apply&nbsp;&nbsp;</div>
+							<input type="hidden" name="hostName" id="hostName"
+								th:value="${data.page.hostName}" readonly /> <input
+								type="hidden" name="pageName" id="pageName"
+								th:value="${data.page.pageName}" readonly /> <input
+								type="hidden" name="content" id="myHtml" class="form-control" />
 						</div>
-						<div th:replace="admin/templateBank/templates :: ${data.template}"></div>	
-					</div>		
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-10">
+				<div class="row jumbotron">
+					<div class="col-sm-12">Header</div>
+				</div>
+				<div id="templateBody"></div>
+				<div class="row jumbotron">
+					<div class="col-sm-12">Footer</div>
 				</div>
 			</div>
-	
-		<div th:replace="component :: jsLoad"></div>
-	</body>
+			<div class="col-sm-1">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="pageList"></div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="preview"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+	<script th:inline="javascript">
+		var hostAddress = "http://localhost:8989/cmsapp";
+		var count = 0;
+		var max = 0;
+		var rowsCount = 0;
+		$(document)
+				.ready(
+						function() {
+
+							var makeId;
+							$.each($('.full-border'), function() {
+								makeId = ((this.id).substring(0, (this.id)
+										.indexOf("container")));
+								if (max < makeId)
+									max = makeId;
+							});
+							count = max + 1;
+							max = 0;
+
+							var content = /*[[${data.page.content}]]*/'hello';
+							var hostName = /*[[${data.page.hostName}]]*/'hello';
+							var pageName = /*[[${data.page.pageName}]]*/'hello';
+							$("#templateBody").html(content);
+							$("#preview")
+									.html(
+											"<a href='"+hostAddress+"/admin/page/preview/"+pageName+"/host/"+hostName+"' class='btn btn-sm btn-info '>Preview&nbsp;</a>");
+							$("#pageList")
+									.html(
+											"<a href='"+hostAddress+"/admin/page/get-pages/"+hostName+"' class='btn btn-sm btn-success '>PageList</a>");
+
+							/*Save Template*/
+							$(document).on(
+									'click',
+									'#savetemplate',
+									function(event) {
+
+										$('#myHtml').val(
+												$('#templateBody').html());
+										$("#myTemplateForm").submit();
+									});
+
+							/*Adding Container in Template*/
+							/*$(".addtemplateContainer").bind("click", function(event){*/
+							$(document)
+									.on(
+											'click',
+											'.addtemplateContainer',
+											function(event) {
+												var makeId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("btn")))
+														+ "template";
+												$("#" + makeId)
+														.append(
+																"<div class='row' id='"+count+"content'>"
+																		+ "<div class='col-sm-12 bottom-border'>"
+																		+ "<div class='rmadmin'>"
+																		+ "<div class='row'>"
+																		+ "<div class='col-sm-6'>"
+																		+ "<select id='"+count+"chooseElement' class='form-control choose-element'>"
+																		+ "<option>Lebel</option>"
+																		+ "<option>Pargraph</option>"
+																		+ "<option>Image</option>"
+																		+ "<option>Slide</option>"
+																		+ "<option>Ritch-Text</option>"
+																		+ "</select>"
+																		+ "</div>"
+																		+ "<div class='col-sm-6 text-right'>"
+																		+ "<div id='"+count+"contentRemoveAction' class='contentRemoveAction btn btn-sm btn-danger glyphicon glyphicon-remove'></div>"
+																		+ "</div>"
+																		+ "</div>"
+																		+ "<div id='"+count+"selectBox' class='row'>"
+																		+ "</div>"
+																		+ "</div>"
+																		+ "<div id='"+count+"contentElement'><h1>HellO</h1></div>"
+																		+ "</div>"
+																		+ "</div>");
+												count++;
+											});
+
+							/*Removing Container From Template*/
+							$(document)
+									.on(
+											'click',
+											'.contentRemoveAction',
+											function(event) {
+												var makeId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("contentRemoveAction")))
+														+ "content";
+												$("#" + makeId).remove();
+											});
+
+							/*Adding Container From Template*/
+							$(document)
+									.on(
+											'click',
+											'.contentAddAction',
+											function(event) {
+												var makeId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("contentAddAction")))
+														+ "content";
+												alert("It's works" + makeId);
+												$("#" + makeId).append(
+														"<div>Cool</div>");
+											});
+
+							/*Choose element from select-Box for template-content*/
+							$(document)
+									.on(
+											'click',
+											'.choose-element',
+											function(event) {
+												var makeId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("chooseElement")))
+														+ "contentElement";
+												var makeValue = event.target.value;
+												var idData = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("chooseElement")));
+												$('#' + makeId).html(
+														'<h3>cool..!<h3>');
+												var selectId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("chooseElement")))
+														+ "selectBox";
+
+												if (event.target.value == 'Pargraph') {
+													var selectDataId = idData
+															+ "selectBox";
+													$("#" + selectDataId)
+															.show();
+
+													$('#' + selectId)
+															.html(
+																	"<div class='col-sm-10 full-border'>"
+																			+ "<div id='"+idData+"selectBoxElement' >"
+																			+ "<textarea id='"+idData+"elementData' rows='4' cols='50'>"
+																			+ "Enter text here...</textarea>"
+																			+ "</div>"
+																			+ "</div>"
+																			+ "<div class='col-sm-2'>"
+																			+ "<div id='"+idData+"selectBoxApply' class='selectBoxApply btn btn-sm btn-warning'>Apply</div>"
+																			+ "</div>");
+												}
+											});
+							/*Select-Box Apply button*/
+							$(document)
+									.on(
+											'click',
+											'.selectBoxApply',
+											function(event) {
+												var selectBoxId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("selectBoxApply")))
+														+ "selectBox";
+												var elementDataId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("selectBoxApply")))
+														+ "elementData";
+												var contentElementId = ((event.target.id)
+														.substring(
+																0,
+																(event.target.id)
+																		.indexOf("selectBoxApply")))
+														+ "contentElement";
+
+												$('#' + contentElementId).html(
+														$("#" + elementDataId)
+																.val());
+												$("#" + selectBoxId).html('');
+											});
+
+						});
+	</script>
+</body>
 </html>

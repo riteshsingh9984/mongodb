@@ -8,9 +8,11 @@ import com.models.PageResponse;
 
 public interface PageService {
 
-	public PageResponse getPageByPageName(String pageName);
+	public PageResponse getPageByPageName(String pageName, String hostName);
 
 	public Set<PageResponse> getPages(String hostName) throws IOException;
 
 	public void save(Object pageRequest) throws IOException;
+
+	void update(Object pageRequest) throws IOException;
 }

@@ -1,6 +1,7 @@
 var hostAddress="http://localhost:8989/cmsapp";
 var getPages = "/admin/page/getpages/";
-var pageDesign="/admin/page/page-design/"
+var pageDesign="/admin/page/page-design/";
+var pagePreview = "/admin/page/preview/";	
 
 function ajaxCallGet(url,method){
 	
@@ -48,7 +49,7 @@ function ajaxCallPost(url,method,data){
 }	
 
 $(document).ready(function(){
-	$("#myTemplate").bind("click", function(event){
+	/*$("#myTemplate").bind("click", function(event){
         var makeId = event.target.value;
         alert(makeId);
         
@@ -72,7 +73,7 @@ $(document).ready(function(){
 					"</div>"
 			);
         }
-    });
+    });*/
 	
 	
 	$('#example').DataTable( {
@@ -90,13 +91,13 @@ $(document).ready(function(){
             },
             { "data": "hostName",
               "render": function ( data, type, full, meta ) {
-          	      return '<a title="Page Design" href="'+hostAddress+pageDesign+full.hostName+'/'+full.pageName+'" class="">'+full.pageName+'</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+          	      return '<a title="Page Design" href="'+hostAddress+pageDesign+full.pageName+'/host/'+full.hostName+'" class="">'+full.pageName+'</a>&nbsp;&nbsp;&nbsp;&nbsp;';
               	    } 	
               },
             { "data": "pageName",
                 "render": function ( data, type, full, meta ) {
               	      return '<a title="Edit Site" href="'+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
-              	      		 '<a title="View Site" href="'+data+'" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+              	      		 '<a title="View Site" href="'+hostAddress+pagePreview+full.pageName+'/host/'+full.hostName+'"  class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
               	    } 	
               }
         ]

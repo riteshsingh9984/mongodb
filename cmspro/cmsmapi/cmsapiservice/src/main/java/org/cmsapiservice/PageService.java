@@ -8,4 +8,5 @@ import com.requestBean.PageRequest;
 public interface PageService {
 
 	void savePage(PageRequest pageRequest, String userName);
+	void updatePage(PageRequest pageRequest, String userName);
 }

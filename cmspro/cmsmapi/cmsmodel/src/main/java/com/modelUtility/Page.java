@@ -15,6 +15,8 @@ public class Page {
 				this.pageName = pageRequest.getPageName();
 			if(pageRequest.getTemplateName()!=null)
 				this.templateName = pageRequest.getTemplateName();
+			if(pageRequest.getContent()!=null)
+				this.setContent(pageRequest.getContent());
 			
 			EditableInfo editableInfo = new EditableInfo();
 			editableInfo.setCreatedAt();
