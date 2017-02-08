@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.models.PageResponse;
+import com.services.HostService;
 import com.services.PageService;
 
 @Controller("liveController")
@@ -25,20 +26,33 @@ public class LiveController {
 	@Qualifier("pageService")
 	private PageService pageService;
 	
+	@Autowired
+	@Qualifier("hostService")
+	private HostService hostService;
+	
 	@RequestMapping(value = { "/{hostName}/{pageName}" }, method = RequestMethod.GET)
 	public ModelAndView formPageDesignPreview(@PathVariable("hostName") String hostName, @PathVariable("pageName") String pageName) throws IOException {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		PageResponse pageResponse = null;
 		try{
-			pageResponse = pageService.getPageByPageName(pageName,hostName);
-			if(pageResponse != null){
-				data.put("page", pageResponse);
-				return new ModelAndView("admin/live/live", "data", data);
+			
+			if(hostService.getHostByHostName(hostName)!=null){
+				pageResponse = pageService.getPageByPageName(pageName,hostName);
+				if(pageResponse != null){
+					data.put("page", pageResponse);
+					return new ModelAndView("admin/live/live", "data", data);
+				}
+				data.put("pageType", pageName);
+				data.put("hostName", hostName);
+				data.put("hostType", null);
+			}else{
+				data.put("pageType", null);
+				data.put("hostName", null);
+				data.put("hostType", hostName);
 			}
 		}catch(Exception ee){}
 		
-		data.put("page", pageResponse);
 		return new ModelAndView("admin/live/404", "data", data);
 	}
 	
@@ -46,6 +60,12 @@ public class LiveController {
 	public ModelAndView formPageDesignew(@PathVariable("hostName") String hostName) throws IOException {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
+		
+		if(hostService.getHostByHostName(hostName)==null){
+			data.put("pageType", null);
+			data.put("hostName", null);
+			data.put("hostType", hostName);
+		}
 		
 		return new ModelAndView("admin/live/404", "data", data);
 	}

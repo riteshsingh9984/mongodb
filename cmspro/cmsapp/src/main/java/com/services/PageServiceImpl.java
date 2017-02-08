@@ -47,8 +47,10 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 									.filter(page-> pageName.equals(page.getPageName()))
 									.findAny()
 									.orElse(null);
-			pageResponse.setHostName(hostName);
-			return pageResponse;
+			if(pageResponse != null ){
+				pageResponse.setHostName(hostName);
+				return pageResponse;
+			}
 		}
 		
 		return null;

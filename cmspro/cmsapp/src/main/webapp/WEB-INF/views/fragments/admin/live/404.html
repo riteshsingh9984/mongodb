@@ -13,7 +13,8 @@
 					<div class="error-details">Sorry, an error has occured,
 						Requested page not found!</div>
 					<div class="error-actions">
-						
+						<span th:if="${data.hostType != null}">Host <b th:text="${data.hostType}">local</b> not Found !<br/></span>
+						<span th:if="${data.pageType != null}">Page <b th:text="${data.pageType}">local</b> not Found on <b th:text="${data.hostName}">local</b> Host ! </span>
 					</div>
 				</div>
 			</div>
