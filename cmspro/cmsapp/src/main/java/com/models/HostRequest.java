@@ -1,6 +1,7 @@
 package com.models;
 
 import com.modelUtility.EditableInfo;
+import com.modelUtility.HeaderFooter;
 
 public class HostRequest {
 
@@ -33,5 +34,4 @@ public class HostRequest {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
 }

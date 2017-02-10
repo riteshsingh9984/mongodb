@@ -86,6 +86,16 @@
 				/*Adding Container in Template*/
 				/*$(".addtemplateContainer").bind("click", function(event){*/
 				$(document).on('click','.addtemplateContainer',function(event) {
+					
+					/* getting unique id for element insert. */
+					var max = 0;
+					$('.insertElement').each(function () {
+					    if(max < ((this.id).substring(0,(this.id).indexOf("insert"))))
+					    	max = ((this.id).substring(0,(this.id).indexOf("insert"))); 
+					});
+					count = max + 1;
+					
+					
 									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn"))) + "template";
 									$("#" + makeId).append(
 													"<div class='row' id='"+count+"content'>"
@@ -181,20 +191,21 @@
 									});
 					
 				});
-
+				
+				/*Make view in adminMode*/
+				$( document ).on( 'click', '.removeclass', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"container";
+					$("#"+makeId).remove();
+					
+					makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"removebtn";
+					$("#"+makeId).remove();
+					});
+				
 				/*Removing Container From Template*/
 				$(document).on('click','.contentRemoveAction',function(event) {
-									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentRemoveAction"))) + "content";
-									$("#" + makeId).remove();
-								});
-
-				/*Adding Container From Template*/
-				$(document).on('click','.contentAddAction',function(event) {
-									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentAddAction"))) + "content";
-									alert("It's works" + makeId);
-									$("#" + makeId).append("<div>Cool</div>");
-											});
-
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentRemoveAction"))) + "content";
+					$("#" + makeId).remove();
+				});
 			});
 	</script>
 	

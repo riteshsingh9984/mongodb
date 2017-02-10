@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.modelUtility.EditableInfo;
+import com.modelUtility.HeaderFooter;
 import com.modelUtility.Page;
 
 @Document(collection = "host")
@@ -19,6 +20,35 @@ public class Host implements Serializable {
 	
 	private String hostName;
 	private String aliasName;
+	private HeaderFooter header;
+	private HeaderFooter footer;
+	private boolean isHeader;
+	private boolean isFooter;
+	
+	public HeaderFooter getHeader() {
+		return header;
+	}
+	public void setHeader(HeaderFooter header) {
+		this.header = header;
+	}
+	public HeaderFooter getFooter() {
+		return footer;
+	}
+	public void setFooter(HeaderFooter footer) {
+		this.footer = footer;
+	}
+	public boolean isHeader() {
+		return isHeader;
+	}
+	public void setHeader(boolean isHeader) {
+		this.isHeader = isHeader;
+	}
+	public boolean isFooter() {
+		return isFooter;
+	}
+	public void setFooter(boolean isFooter) {
+		this.isFooter = isFooter;
+	}
 	private Set<Page> pages;
 	private EditableInfo editableInfo;
 	

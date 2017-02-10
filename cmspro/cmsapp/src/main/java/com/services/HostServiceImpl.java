@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.Response;
 import com.dao.DataAccessObject;
 import com.google.gson.Gson;
+import com.models.HeaderFooterRequest;
 import com.models.HostRequest;
 import com.models.HostResponse;
 
@@ -26,6 +27,9 @@ public class HostServiceImpl extends DataAccessObject implements HostService {
 	
 	@Value("${save.host.api}")
 	private String saveHostApi;
+	
+	@Value("${save.host.header.footer.api}")
+	private String saveHostHeaderFooterApi;
 	
 	@Value("${ip}")
 	private String ip;
@@ -83,5 +87,14 @@ public class HostServiceImpl extends DataAccessObject implements HostService {
 		header.put("token", "myToken");
 		
 		sendPOST(url+saveHostApi, data, header);
+	}
+
+	@Override
+	public void saveHeaderFooter(HeaderFooterRequest headerFooterRequest) throws IOException {
+		String url = ip+port;
+		String data = new Gson().toJson(headerFooterRequest);
+		Map<String, String> header = new HashMap<String, String>();
+		header.put("token", "myToken");
+		sendPOST(url+saveHostHeaderFooterApi, data, header);
 	}
 }

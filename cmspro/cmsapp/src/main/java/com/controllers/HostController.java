@@ -22,9 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.models.HeaderFooterRequest;
 import com.models.HostRequest;
 import com.models.HostResponse;
+import com.models.PageRequest;
+import com.models.TemplateResponse;
 import com.services.HostService;
+import com.services.TemplateService;
 
 @Controller
 @ComponentScan("com.services, com.repo")
@@ -35,9 +39,12 @@ public class HostController {
 	@Qualifier("hostService")
 	private HostService hostService;
 
+	@Autowired
+	@Qualifier("templateService")
+	private TemplateService templateService;
+	
 	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
 	public ModelAndView form() throws IOException {
-		
 		Map<String, Object> data = new HashMap<String, Object>();
 		
 		return new ModelAndView("admin/host/create", "data", data);
@@ -46,19 +53,18 @@ public class HostController {
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("hostSave") HostRequest host, BindingResult result,
 			HttpServletRequest request) throws Exception {
-		System.out.println("Host Details : " + new Gson().toJson(host));
 		try {
 			hostService.save(host);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		Map<String, Object> data = new HashMap<String, Object>();
+		
 		return new ModelAndView("admin/host/create", "data", data);
 	}
 	
 	@RequestMapping(value = "/gethost/{hostName}", method = RequestMethod.GET)
     public @ResponseBody String getHostName(@PathVariable("hostName") String hostName) {
- 
 		if((hostService.getHostByHostName(hostName)) != null)
 			return "FOUND";
 		
@@ -67,7 +73,6 @@ public class HostController {
 	
 	@RequestMapping(value = { "/get-hosts" }, method = RequestMethod.GET)
 	public ModelAndView getEmployees() throws IOException {
-		
 		Map<String, Object> data = new HashMap<String, Object>();
 		
 		return new ModelAndView("admin/host/list", "data", data);
@@ -80,19 +85,48 @@ public class HostController {
 		Set<HostResponse> hosts = hostService.getHosts();
 		HostResponse host = null;
 		Set<HostResponse> hostList = new HashSet<HostResponse>();
-		
 		for(Object object : hosts){
 			host = gson.fromJson(gson.toJson(object), HostResponse.class);
-			
 			if(host.getAliasName() == null )
-				host.setAliasName("Not-Set");
-			
+				host.setAliasName("Not-Set");	
 			hostList.add(host);
 		}
-		
 		Map<String,Object> data = new HashMap<String,Object>();
 		data.put("data", hostList);
 		
 		return new Gson().toJson(data);
     }
+	
+	
+	@RequestMapping(value = { "/create-header-footer/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView form(@PathVariable("hostName") String hostName) throws IOException {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("hostName", hostName);
+		Set<TemplateResponse> templates= templateService.getTemplates();
+		data.put("templates", templates);
+		
+		return new ModelAndView("admin/host/header-footer-create", "data", data);
+	}
+	
+	@RequestMapping(value = { "/header-footer-save" }, method = RequestMethod.POST)
+	public ModelAndView save(@ModelAttribute("hostSave") HeaderFooterRequest headerFooterRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		try {
+			if(headerFooterRequest != null){
+				TemplateResponse template = templateService.getTemplateByTemplateName(headerFooterRequest.getTemplateName());
+				if(template != null){
+					headerFooterRequest.setContent(template.getContent());
+					hostService.saveHeaderFooter(headerFooterRequest);
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		Set<TemplateResponse> templates= templateService.getTemplates();
+		data.put("templates", templates);
+		
+		return new ModelAndView("admin/host/header-footer-create", "data", data);
+	}
+	
 }

@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Response;
 import com.google.gson.Gson;
+import com.modelUtility.HeaderFooter;
 import com.models.Employee;
 import com.models.Host;
+import com.requestBean.HeaderFooterRequest;
 
 @Controller("hostController")
 @ComponentScan("org.cmsapiservice")
@@ -106,6 +108,35 @@ public class HostController {
 		responseData.setData(host);
 		responseData.setStatus("200");
 
+		return new Gson().toJson(responseData);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/save/header-footer", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody String saveHostHeaderFooter(ModelMap model, @RequestBody HeaderFooterRequest headerFooterRequest,
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			throws UnknownHostException {
+		Host host = hostService.getHostByName(headerFooterRequest.getHostName());
+		if(host != null){
+			HeaderFooter headerFooter= new HeaderFooter();
+			headerFooter.setContent(headerFooterRequest.getContent());
+			headerFooter.setHeaderFooterName(headerFooterRequest.getHeaderFooterName());
+			headerFooter.setTemplateName(headerFooterRequest.getTemplateName());
+			headerFooter.setHeight("200");
+			headerFooter.setEditableInfo(headerFooterRequest.getEditableInfo());
+			if(headerFooterRequest.getType().equals("header")){
+				host.setHeader(headerFooter);
+				host.setHeader(true);
+			}else{
+				host.setFooter(headerFooter);
+				host.setFooter(true);
+			}
+			hostService.saveHost(host);
+		}
+		Response responseData = new Response();
+		responseData.setData(host);
+		responseData.setStatus("200");
+		
 		return new Gson().toJson(responseData);
 	}
 }
