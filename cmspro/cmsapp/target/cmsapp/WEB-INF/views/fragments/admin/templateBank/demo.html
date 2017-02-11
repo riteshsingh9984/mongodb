@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+     <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div th:replace="component :: cmsHeader"></div>
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						
+						<select id="lstFruits" multiple="multiple">
+						    <option value="1">Mango</option>
+						    <option value="2">Apple</option>
+						    <option value="3">Banana</option>
+						    <option value="4">Guava</option>
+						    <option value="5">Orange</option>
+						</select>
+						<input type="button" id="btnSelected" value="Get Selected" />
+												
+					</div>
+				</div>
+				<br/>
+				<div id="checkboxCol" class="jumbotron">
+					<div class="row">
+						<div class="col-sm-9 text-center">
+										
+						</div>
+						<div class="col-sm-3 text-center">
+							<input type="hidden" id="dataText" value=""></span>	
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+	    </div>
+	    </div>
+		<div th:replace="component :: createTemplateJsLoad"></div>
+		
+		<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+		
+	</body>
+</html>

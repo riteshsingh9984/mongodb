@@ -52,7 +52,6 @@ public class PageServiceImpl extends DataAccessObject implements PageService {
 				return pageResponse;
 			}
 		}
-		
 		return null;
 	}
 

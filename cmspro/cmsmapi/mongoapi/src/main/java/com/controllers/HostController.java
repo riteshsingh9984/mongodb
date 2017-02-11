@@ -118,12 +118,7 @@ public class HostController {
 			throws UnknownHostException {
 		Host host = hostService.getHostByName(headerFooterRequest.getHostName());
 		if(host != null){
-			HeaderFooter headerFooter= new HeaderFooter();
-			headerFooter.setContent(headerFooterRequest.getContent());
-			headerFooter.setHeaderFooterName(headerFooterRequest.getHeaderFooterName());
-			headerFooter.setTemplateName(headerFooterRequest.getTemplateName());
-			headerFooter.setHeight("200");
-			headerFooter.setEditableInfo(headerFooterRequest.getEditableInfo());
+			HeaderFooter headerFooter= new HeaderFooter(headerFooterRequest);
 			if(headerFooterRequest.getType().equals("header")){
 				host.setHeader(headerFooter);
 				host.setHeader(true);

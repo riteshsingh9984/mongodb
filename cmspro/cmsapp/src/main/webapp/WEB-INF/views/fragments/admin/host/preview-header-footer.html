@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div th:replace="component :: cmsHeader"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<div class="row">
+					<div class="col-sm-2">
+						<b><span th:text="${data.type}">Footer</span> : </b><span th:text="${data.headerFooter.headerFooterName}"></span>
+					</div>
+				</div>
+				<div id="templateBody"></div>
+			</div>
+			<div class="col-sm-1">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="headerDesign"></div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="footerDesign"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+	<script th:inline="javascript">
+		var hostAddress = "http://localhost:8989/cmsapp";
+
+		$(document)
+				.ready(
+						function() {
+
+							var content = /*[[${data.headerFooter.content}]]*/'hello';
+							var hostName = /*[[${data.hostName}]]*/'hello';
+
+							$("#templateBody").html(content);
+							$(".rmadmin").hide();
+							$("#headerDesign")
+									.html(
+											"<a href='"+hostAddress+"/admin/host/header-design/"+hostName+"' class='btn btn-sm btn-info '>Header-Design</a>");
+							$("#footerDesign")
+								.html(
+									"<a href='"+hostAddress+"/admin/host/footer-design/"+hostName+"' class='btn btn-sm btn-info '>Footer-Design</a>");
+						});
+	</script>
+</body>
+</html>

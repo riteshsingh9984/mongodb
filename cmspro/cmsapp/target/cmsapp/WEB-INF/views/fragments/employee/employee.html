@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+    <div th:replace="component :: cssLoad"></div>
+    
+    <div th:replace="component :: title"></div>
+	</head>
+	<body>
+		<div th:replace="component :: title"></div>
+		<div class="container">    
+	        <div class="table-responsive">
+		        <table width="50%">
+		        	<tbody>
+		        		<tr>
+		        			<th>ID</th>
+		        			<th>NAME</th>
+		        			<th>SSN</th>
+		        			<th>SALARY</th>
+		        		</tr>
+		        		<tr th:each="employee : ${data.employees}" >
+		        			<td><span th:text="${employee.id}"></span></td>
+		        			<td><span th:text="${employee.name}"></span></td>
+		        			<td><span th:text="${employee.ssn}"></span></td>
+		        			<td><span th:text="${employee.salary}"></span></td>
+		        		</tr>
+		        	</tbody>
+		        </table>
+	        </div>
+	        <div class="row">
+	        	<div class="col-sm-12">
+	        		<div ng-app="myApp" w3-test-directive></div>
+	        	</div>
+	        </div>
+	    </div>
+		
+		<div th:replace="component :: jsLoad"></div>
+	</body>
+</html>

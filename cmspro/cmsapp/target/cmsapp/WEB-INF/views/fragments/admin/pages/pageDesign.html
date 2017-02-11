@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div th:replace="component :: cmsHeader"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1">
+				<form id="myTemplateForm" action="#"
+					th:action="@{/admin/page/update}" method="post">
+
+					<div class="row">
+						<div class="col-sm-62 text-center">
+							<div class="btn btn-sm btn-success" id="savetemplate">&nbsp;Apply&nbsp;&nbsp;</div>
+							<input type="hidden" name="hostName" id="hostName"
+								th:value="${data.page.hostName}" readonly /> <input
+								type="hidden" name="pageName" id="pageName"
+								th:value="${data.page.pageName}" readonly /> <input
+								type="hidden" name="content" id="myHtml" class="form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-10">
+				<div class="row jumbotron">
+					<div class="col-sm-12">Header</div>
+				</div>
+				<div id="templateBody"></div>
+				<div class="row jumbotron">
+					<div class="col-sm-12">Footer</div>
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="pageList"></div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="preview"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+	<script th:inline="javascript">
+		var hostAddress = "http://localhost:8989/cmsapp";
+		var count = 0;
+		var max = 0;
+		var rowsCount = 0;
+		$(document).ready(function() {
+		
+			var makeId;
+				$.each($('.full-border'), function() {
+					makeId = ((this.id).substring(0, (this.id).indexOf("container")));
+					if (max < makeId)
+						max = makeId;
+				});
+				count = max + 1;
+				max = 0;
+
+				var content = /*[[${data.page.content}]]*/'hello';
+				var hostName = /*[[${data.page.hostName}]]*/'hello';
+				var pageName = /*[[${data.page.pageName}]]*/'hello';
+				$("#templateBody").html(content);
+				count = $('#templateBody').find('[id$=content]').length + 1;
+				$("#preview").html("<a href='"+hostAddress+"/admin/page/preview/"+pageName+"/host/"+hostName+"' class='btn btn-sm btn-info '>Preview&nbsp;</a>");
+				$("#pageList").html("<a href='"+hostAddress+"/admin/page/get-pages/"+hostName+"' class='btn btn-sm btn-success '>PageList</a>");
+
+				/*Save Template*/
+				$(document).on('click','#savetemplate',function(event) {
+
+							$('#myHtml').val($('#templateBody').html());
+							$("#myTemplateForm").submit();
+						});
+
+				/*Adding Container in Template*/
+				/*$(".addtemplateContainer").bind("click", function(event){*/
+				$(document).on('click','.addtemplateContainer',function(event) {
+					
+					/* getting unique id for element insert. */
+					var max = 0;
+					$('.insertElement').each(function () {
+					    if(max < ((this.id).substring(0,(this.id).indexOf("insert"))))
+					    	max = ((this.id).substring(0,(this.id).indexOf("insert"))); 
+					});
+					count = max + 1;
+					
+					
+									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn"))) + "template";
+									$("#" + makeId).append(
+													"<div class='row' id='"+count+"content'>"
+														+ "<div class='col-sm-12 bottom-border'>"
+															+ "<div class='rmadmin'>"
+																+ "<div class='row'>"
+																	+ "<div class='col-sm-6'>"
+																		+"<div id='"+count+"insert' class='insertElement btn btn-sm btn-success'>INSERT</div>"
+																	+ "</div>"
+																	+ "<div class='col-sm-6 text-right'>"
+																		+ "<div id='"+count+"contentRemoveAction' class='contentRemoveAction btn btn-sm btn-danger glyphicon glyphicon-remove'></div>"
+																	+ "</div>"
+																+ "</div>"
+																+"<div id='"+count+"elementArea' class='row full-border'>"
+																	+ "<div id='"+count+"elementDataArea' class='col-sm-11' >"
+																		+ "<textarea id='"+count+"elementData' rows='4' cols='50'>"
+																					+ "Enter text here...</textarea>"
+																	+ "</div>"
+																	+ "<div class='col-sm-1'>"
+																		+ "<div id='"+count+"selectBoxApply' class='selectBoxApply btn btn-sm btn-warning'>Apply</div>"
+																	+ "</div>"
+																+ "</div>"
+															+ "</div>"
+															+"<div id='"+count+"applyElementData'></div>"
+														+ "</div>"
+													+ "</div>");
+									
+									/* tiinymce initilization */
+									tinymce.init({
+												selector : 'textarea',
+												plugins : [
+											           'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+											           'searchreplace wordcount visualblocks visualchars code fullscreen',
+											           'insertdatetime media nonbreaking save table contextmenu directionality',
+											           'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc' 
+											           ],
+												toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+													    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+														image_advtab: true,
+														mode : "textareas",
+														menubar : false,
+														statusbar : false
+													});
+									
+									count++;
+								});
+				
+				/*Apply the all element on div*/
+				$(document).on('click','.selectBoxApply',function(event) {
+					alert("Apply clicked..!");
+					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementData";
+					var applyElementData = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "applyElementData";
+					var elementArea = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementArea";
+					
+					$('#' + applyElementData).html("");
+					$('#' + applyElementData).html(tinyMCE.get(elementDataId).getContent());
+					
+					$('#'+elementArea).hide();
+					
+				});
+				
+				/*Show the tinymce textbox to insert data into division*/
+				$(document).on('click','.insertElement',function(event) {
+					alert("Apply clicked..!");
+					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementData";
+					var elementDataArea = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementDataArea";
+					$('#'+elementDataArea).html("");
+					$('#'+elementDataArea).html("<textarea id='"+elementDataId+"' rows='4' cols='50'>"
+							+ "Enter text here...</textarea>");
+					var elementArea = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementArea";
+					var applyElementData = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "applyElementData";
+					
+					var theHtml = $('#'+applyElementData).eq(0).html();
+					
+					$('#' +elementDataId ).val(theHtml);
+					$('#'+elementArea).show();
+					
+					/* tiinymce initilization */
+					tinymce.init({
+								selector : 'textarea',
+								plugins : [
+							           'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+							           'searchreplace wordcount visualblocks visualchars code fullscreen',
+							           'insertdatetime media nonbreaking save table contextmenu directionality',
+							           'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc' 
+							           ],
+								toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+									    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+										image_advtab: true,
+										mode : "textareas",
+										menubar : false,
+										statusbar : false
+									});
+					
+				});
+				
+				/*Make view in adminMode*/
+				$( document ).on( 'click', '.removeclass', function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"container";
+					$("#"+makeId).remove();
+					
+					makeId = ((event.target.id).substring(0,(event.target.id).indexOf("remove")))+"removebtn";
+					$("#"+makeId).remove();
+					});
+				
+				/*Removing Container From Template*/
+				$(document).on('click','.contentRemoveAction',function(event) {
+					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentRemoveAction"))) + "content";
+					$("#" + makeId).remove();
+				});
+			});
+	</script>
+	
+</body>
+</html>

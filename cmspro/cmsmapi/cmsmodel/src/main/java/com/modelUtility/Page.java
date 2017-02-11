@@ -24,7 +24,15 @@ public class Page {
 		}
 	}
 	
-	public Page() {}
+	public Page() {
+		
+		EditableInfo editableInfo = new EditableInfo();
+		editableInfo.setCreatedAt();
+		editableInfo.setUpdatedAt();
+		editableInfo.setCreatedBy("Unknown");
+		editableInfo.setUpdatedBy("Unknown");
+		this.setEditableInfo(editableInfo);
+	}
 	
 	public String getPageName() {
 		return pageName;

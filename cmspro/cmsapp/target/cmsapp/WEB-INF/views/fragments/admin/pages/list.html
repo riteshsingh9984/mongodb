@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div th:replace="component :: cmsHeader"></div>
+	<div class="container">
+		<div class="message">
+		<p><span class="lable-name">Host</span>
+			<span class="label-value" th:text="${data.hostName}">www.rockon.com</span>
+			<input type="hidden" id="myHost" th:value="${data.hostName}"  />	
+		</p>
+		</div>
+		<div class="row ">
+			<div class="col-sm-12">
+			<div class="jumbotron relative">
+			<div class="btn-actions">
+				<a href="#" th:href="@{'/admin/page/create/' + ${data.hostName}}" title="Add New Page" class="btn btn-default btn-circle-sm btn-primary">+</a>			
+			</div>
+				<div class="table-responsive">
+					<table id="example" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Host Name</th>
+								<th>Name</th>
+								<th>Template Name</th>
+								<th>CreatedBy</th>
+								<th>CreatedAt</th>
+								<th>Page Design</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div></div>
+		</div>
+	</div>
+	<div th:replace="component :: jsLoadCreatePage"></div>
+</body>
+</html>

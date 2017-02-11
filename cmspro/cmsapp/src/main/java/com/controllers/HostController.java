@@ -109,7 +109,7 @@ public class HostController {
 	}
 	
 	@RequestMapping(value = { "/header-footer-save" }, method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("hostSave") HeaderFooterRequest headerFooterRequest, BindingResult result,
+	public ModelAndView saveHeaderFooter(@ModelAttribute("hostSave") HeaderFooterRequest headerFooterRequest, BindingResult result,
 			HttpServletRequest request) throws Exception {
 		try {
 			if(headerFooterRequest != null){
@@ -129,4 +129,110 @@ public class HostController {
 		return new ModelAndView("admin/host/header-footer-create", "data", data);
 	}
 	
+	@RequestMapping(value = { "/header-design/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView formHeaderDesign(@PathVariable("hostName") String hostName) throws IOException {
+		HeaderFooterRequest headerFooterRequest = new HeaderFooterRequest();
+		try {
+				HostResponse hostResponse = hostService.getHostByHostName(hostName);
+				if(hostResponse != null){
+					if(hostResponse.getHeader()!= null){
+						headerFooterRequest.setEditableInfo(hostResponse.getHeader().getEditableInfo());
+						headerFooterRequest.setHeaderFooterName(hostResponse.getHeader().getHeaderFooterName());
+						headerFooterRequest.setTemplateName(hostResponse.getHeader().getTemplateName());
+						headerFooterRequest.setType("header");
+						headerFooterRequest.setContent(hostResponse.getHeader().getContent());
+						headerFooterRequest.setHostName(hostResponse.getHostName());
+					}
+				}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("header", headerFooterRequest);
+		
+		return new ModelAndView("admin/host/header-design", "data", data);
+	}
+	
+	@RequestMapping(value = { "/header-design-save" }, method = RequestMethod.POST)
+	public ModelAndView saveHeaderDesign(@ModelAttribute("hostSave") HeaderFooterRequest headerFooterRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		try {
+			if(headerFooterRequest!= null){
+				hostService.saveHeaderFooter(headerFooterRequest);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("header", headerFooterRequest);
+		
+		return new ModelAndView("admin/host/header-design", "data", data);
+	}
+	
+	@RequestMapping(value = { "/footer-design/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView formFooterDesign(@PathVariable("hostName") String hostName) throws IOException {
+		HeaderFooterRequest headerFooterRequest = new HeaderFooterRequest();
+		try {
+				HostResponse hostResponse = hostService.getHostByHostName(hostName);
+				if(hostResponse != null){
+					if(hostResponse.getHeader()!= null){
+						headerFooterRequest.setEditableInfo(hostResponse.getFooter().getEditableInfo());
+						headerFooterRequest.setHeaderFooterName(hostResponse.getFooter().getHeaderFooterName());
+						headerFooterRequest.setTemplateName(hostResponse.getFooter().getTemplateName());
+						headerFooterRequest.setType("footer");
+						headerFooterRequest.setContent(hostResponse.getFooter().getContent());
+						headerFooterRequest.setHostName(hostResponse.getHostName());
+					}
+				}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("footer", headerFooterRequest);
+		return new ModelAndView("admin/host/footer-design", "data", data);
+	}
+	
+	@RequestMapping(value = { "/footer-design-save" }, method = RequestMethod.POST)
+	public ModelAndView saveFooterDesign(@ModelAttribute("hostSave") HeaderFooterRequest headerFooterRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		try {
+			if(headerFooterRequest!= null){
+				hostService.saveHeaderFooter(headerFooterRequest);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("footer", headerFooterRequest);
+		
+		return new ModelAndView("admin/host/footer-design", "data", data);
+	}
+	
+	@RequestMapping(value = { "/preview-header-footer/{type}/host/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView formHeaderDesignPreview(@PathVariable("type") String type,@PathVariable("hostName") String hostName) throws IOException {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		try {
+				HostResponse hostResponse = hostService.getHostByHostName(hostName);
+				if(hostResponse != null){
+					if(type.equals("header")){
+						if(hostResponse.getHeader()!= null){
+							data.put("headerFooter", hostResponse.getHeader());
+							data.put("type", "HEADER");
+						}
+					}else
+						if(hostResponse.getHeader()!= null){
+							data.put("headerFooter", hostResponse.getFooter());
+							data.put("type", "FOOTER");
+						}
+				}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		data.put("hostName", hostName);
+		
+		return new ModelAndView("admin/host/preview-header-footer", "data", data);
+	}
 }
