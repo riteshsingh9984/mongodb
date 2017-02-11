@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.models.HostResponse;
 import com.models.PageResponse;
 import com.services.HostService;
 import com.services.PageService;
@@ -36,16 +37,19 @@ public class LiveController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		PageResponse pageResponse = null;
 		try{
-			
-			if(hostService.getHostByHostName(hostName)!=null){
+			HostResponse hostResponse = hostService.getHostByHostName(hostName);
+			if(hostResponse!=null){
 				pageResponse = pageService.getPageByPageName(pageName,hostName);
 				if(pageResponse != null){
 					data.put("page", pageResponse);
+					data.put("header", hostResponse.getHeader());
+					data.put("footer", hostResponse.getFooter());
 					return new ModelAndView("admin/live/live", "data", data);
 				}
 				data.put("pageType", pageName);
 				data.put("hostName", hostName);
 				data.put("hostType", null);
+				
 			}else{
 				data.put("pageType", null);
 				data.put("hostName", null);

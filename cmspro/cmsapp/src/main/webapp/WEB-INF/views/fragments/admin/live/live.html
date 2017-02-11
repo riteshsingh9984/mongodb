@@ -4,19 +4,19 @@
 <div th:replace="component :: cssLiveLoad"></div>
 </head>
 <body>
-	<div class="row jumbotron">
-		<div class="col-sm-12">Header</div>
-	</div>
+	<div id="headerBody"></div>
 	<div id="templateBody"></div>
-	<div class="row jumbotron">
-		<div class="col-sm-12">Footer</div>
-	</div>
+	<div id="footerBody"></div>
 	<div th:replace="component :: jsLoadViewTemplate"></div>
 	<script th:inline="javascript">
 		$(document).ready(function() {
 
 			var content = /*[[${data.page.content}]]*/'hello';
+			var headerContent = /*[[${data.header.content}]]*/'hello';
+			var footerContent = /*[[${data.footer.content}]]*/'hello';
 			$("#templateBody").html(content);
+			$("#headerBody").html(headerContent);
+			$("#footerBody").html(footerContent);
 			$(".rmadmin").hide();
 		});
 	</script>
