@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.modelUtility.EditableInfo;
 import com.modelUtility.HeaderFooter;
+import com.modelUtility.HostLaunchConfig;
 import com.modelUtility.Page;
 
 @Document(collection = "host")
@@ -20,6 +21,8 @@ public class Host implements Serializable {
 	
 	private String hostName;
 	private String aliasName;
+	private String welcomePage;
+	private HostLaunchConfig hostLaunchConfig;
 	private HeaderFooter header;
 	private HeaderFooter footer;
 	private boolean isHeader;
@@ -84,5 +87,17 @@ public class Host implements Serializable {
 	}
 	public void setAliasName(String aliasName) {
 		this.aliasName = aliasName;
+	}
+	public String getWelcomePage() {
+		return welcomePage;
+	}
+	public void setWelcomePage(String welcomePage) {
+		this.welcomePage = welcomePage;
+	}
+	public HostLaunchConfig getHostLaunchConfig() {
+		return hostLaunchConfig;
+	}
+	public void setHostLaunchConfig(HostLaunchConfig hostLaunchConfig) {
+		this.hostLaunchConfig = hostLaunchConfig;
 	}
 }

@@ -43,15 +43,22 @@
 
 							var content = /*[[${data.headerFooter.content}]]*/'hello';
 							var hostName = /*[[${data.hostName}]]*/'hello';
+							var isHeader = /*[[${data.isHeader}]]*/false;
+							var isFooter = 	/*[[${data.isFooter}]]*/false;
+							
 
 							$("#templateBody").html(content);
 							$(".rmadmin").hide();
-							$("#headerDesign")
+							if(isHeader){
+								$("#headerDesign")
+										.html(
+												"<a href='"+hostAddress+"/admin/host/header-design/"+hostName+"' class='btn btn-sm btn-info '>Header-Design</a>");
+							}
+							if(isFooter){
+								$("#footerDesign")
 									.html(
-											"<a href='"+hostAddress+"/admin/host/header-design/"+hostName+"' class='btn btn-sm btn-info '>Header-Design</a>");
-							$("#footerDesign")
-								.html(
-									"<a href='"+hostAddress+"/admin/host/footer-design/"+hostName+"' class='btn btn-sm btn-info '>Footer-Design</a>");
+										"<a href='"+hostAddress+"/admin/host/footer-design/"+hostName+"' class='btn btn-sm btn-info '>Footer-Design</a>");
+							}
 						});
 	</script>
 </body>

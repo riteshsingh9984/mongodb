@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.models.HeaderFooterRequest;
+import com.models.HostLaunchRequest;
 import com.models.HostRequest;
 import com.models.HostResponse;
 import com.models.PageRequest;
@@ -42,6 +43,52 @@ public class HostController {
 	@Autowired
 	@Qualifier("templateService")
 	private TemplateService templateService;
+	
+	@RequestMapping(value = { "/launch/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView hostLaunch(@PathVariable("hostName") String hostName) throws IOException {
+		Map<String, Object> data = new HashMap<String, Object>();
+		HostResponse hostResponse = hostService.getHostByHostName(hostName);
+		if((hostResponse) != null){
+			data.put("host", hostResponse);
+		}	
+		return new ModelAndView("admin/host/launch", "data", data);
+	}
+	
+	@RequestMapping(value = { "/launch" }, method = RequestMethod.POST)
+	public ModelAndView saveLaunch(@ModelAttribute("hostSave") HostLaunchRequest hostLaunchRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		try {
+			hostService.saveLaunch(hostLaunchRequest,"up");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		return new ModelAndView("admin/host/list", "data", data);
+	}
+	
+	@RequestMapping(value = { "/launch-down/{hostName}" }, method = RequestMethod.GET)
+	public ModelAndView hostLaunchDown(@PathVariable("hostName") String hostName) throws IOException {
+		Map<String, Object> data = new HashMap<String, Object>();
+		HostResponse hostResponse = hostService.getHostByHostName(hostName);
+		if((hostResponse) != null){
+			data.put("host", hostResponse);
+		}	
+		return new ModelAndView("admin/host/launch-down", "data", data);
+	}
+	
+	@RequestMapping(value = { "/launch-down" }, method = RequestMethod.POST)
+	public ModelAndView saveLaunchDown(@ModelAttribute("hostSave") HostLaunchRequest hostLaunchRequest, BindingResult result,
+			HttpServletRequest request) throws Exception {
+		try {
+			hostService.saveLaunch(hostLaunchRequest, "down");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		return new ModelAndView("admin/host/list", "data", data);
+	}
 	
 	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
 	public ModelAndView form() throws IOException {
@@ -96,7 +143,6 @@ public class HostController {
 		
 		return new Gson().toJson(data);
     }
-	
 	
 	@RequestMapping(value = { "/create-header-footer/{hostName}" }, method = RequestMethod.GET)
 	public ModelAndView form(@PathVariable("hostName") String hostName) throws IOException {
@@ -227,6 +273,8 @@ public class HostController {
 							data.put("headerFooter", hostResponse.getFooter());
 							data.put("type", "FOOTER");
 						}
+					data.put("isHeader", hostResponse.isHeader());
+					data.put("isFooter", hostResponse.isFooter());
 				}
 		} catch (Exception ex) {
 			ex.printStackTrace();

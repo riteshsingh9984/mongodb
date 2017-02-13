@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.Response;
 import com.google.gson.Gson;
 import com.modelUtility.HeaderFooter;
+import com.modelUtility.HostLaunchConfig;
+import com.modelUtility.HostLaunchRequest;
 import com.models.Employee;
 import com.models.Host;
 import com.requestBean.HeaderFooterRequest;
@@ -43,6 +45,9 @@ public class HostController {
 
 		long id = hostService.count();
 		host.setId(id);
+		HostLaunchConfig hostLaunchConfig = new HostLaunchConfig();
+		hostLaunchConfig.setActive(false);
+		host.setHostLaunchConfig(hostLaunchConfig);
 		hostService.saveHost(host);
 		
 		Response responseData = new Response();
@@ -63,6 +68,55 @@ public class HostController {
 		Response responseData = new Response();
 		responseData.setData(host);
 		responseData.setStatus("200");
+		
+		return new Gson().toJson(responseData);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/launchHost", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody String launchHost(ModelMap model, @RequestBody HostLaunchRequest hostLaunchRequest,
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			throws UnknownHostException {
+
+		Response responseData = new Response();
+		if(hostLaunchRequest!=null){
+			Host host = hostService.getHostByName(hostLaunchRequest.getHostName());
+			if(host!=null){
+				host.setWelcomePage(hostLaunchRequest.getWelcomePageName());
+				HostLaunchConfig hostLaunchConfig = new HostLaunchConfig(hostLaunchRequest.getActivePeriod());
+				host.setHostLaunchConfig(hostLaunchConfig);
+				hostService.saveHost(host);
+			}
+			responseData.setData(host);
+			responseData.setStatus("200");
+			
+			return new Gson().toJson(responseData);
+		}
+		responseData.setStatus("500");
+		
+		return new Gson().toJson(responseData);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/launchDownHost", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody String launchDownHost(ModelMap model, @RequestBody HostLaunchRequest hostLaunchRequest,
+			@RequestHeader(value = "token", defaultValue = "foo") String userAgent, HttpServletResponse response)
+			throws UnknownHostException {
+
+		Response responseData = new Response();
+		if(hostLaunchRequest!=null){
+			Host host = hostService.getHostByName(hostLaunchRequest.getHostName());
+			if(host!=null){
+				host.getHostLaunchConfig().setActive(false);
+				host.getHostLaunchConfig().setDownTime(hostLaunchRequest.getActivePeriod());
+				hostService.saveHost(host);
+			}
+			responseData.setData(host);
+			responseData.setStatus("200");
+			
+			return new Gson().toJson(responseData);
+		}
+		responseData.setStatus("500");
 		
 		return new Gson().toJson(responseData);
 	}

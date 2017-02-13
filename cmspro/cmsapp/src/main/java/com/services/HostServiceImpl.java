@@ -31,6 +31,12 @@ public class HostServiceImpl extends DataAccessObject implements HostService {
 	@Value("${save.host.header.footer.api}")
 	private String saveHostHeaderFooterApi;
 	
+	@Value("${host.launch}")
+	private String launchHost;
+	
+	@Value("${host.launch.down}")
+	private String launchDownHost;
+	
 	@Value("${ip}")
 	private String ip;
 	
@@ -96,5 +102,21 @@ public class HostServiceImpl extends DataAccessObject implements HostService {
 		Map<String, String> header = new HashMap<String, String>();
 		header.put("token", "myToken");
 		sendPOST(url+saveHostHeaderFooterApi, data, header);
+	}
+	
+	@Override
+	public void saveLaunch(Object launchHostRequest,String type) throws IOException {
+		String url = ip+port;
+		String data = new Gson().toJson(launchHostRequest);
+		
+		Map<String, String> header = new HashMap<String, String>();
+		
+		header.put("token", "myToken");
+		
+		if(type.equals("up")){
+			sendPOST(url+launchHost, data, header);
+		}else{
+			sendPOST(url+launchDownHost, data, header);
+		}
 	}
 }

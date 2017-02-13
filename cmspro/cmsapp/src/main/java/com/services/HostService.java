@@ -16,4 +16,6 @@ public interface HostService {
 	public void save(Object host) throws IOException;
 	
 	public void saveHeaderFooter(HeaderFooterRequest headerFooterRequest) throws IOException;
+
+	public void saveLaunch(Object host, String type) throws IOException;
 }

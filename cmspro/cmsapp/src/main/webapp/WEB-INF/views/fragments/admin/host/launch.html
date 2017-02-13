@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div class="row">
+		<div class="col-sm-12">
+			<div th:replace="component :: cmsHeader"></div>
+		</div>
+	</div>
+	<form action="#" th:action="@{/admin/host/launch}" method="post">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6 jumbotron text-center">
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Your Host</strong>
+						</div>
+						<div class="col-sm-8">
+							<input name="hostName" id="hostName" required="required" th:value="${data.host.hostName}" readonly
+								type="text" class="form-control" />
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Welcome Page</strong>
+						</div>
+						<div class="col-sm-8">
+							<select name="welcomePageName" id='welcomePageName' class='form-control'>
+								<option th:each="page : ${data.host.pages}"
+									th:value="${page.pageName}"
+									th:text="${page.pageName}">
+									Options</option>
+							</select>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Host Active mins.</strong>
+						</div>
+						<div class="col-sm-8">
+							<input name="activePeriod" id="activePeriod" required="required"
+								type="text" class="form-control" />
+						</div>
+					</div>
+					<br /> <br />
+					<div class="row">
+						<div class="col-sm-12">
+							<input class="btn btn-sm btn-success" type="submit" value="Launch" />
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+	<div th:replace="component :: jsLoadCreateHost"></div>
+</body>
+</html>

@@ -1,8 +1,13 @@
 var hostAddress="http://localhost:8989/cmsapp";
 var getHostByName ="/admin/host/gethost/";
 var getHosts = "/admin/host/gethosts";
-var pageCreate = "/admin/page/create/"
-var pageList = "/admin/page/get-pages/"	
+var pageCreate = "/admin/page/create/";
+var pageList = "/admin/page/get-pages/";
+var headerFooterAdd = "/admin/host/create-header-footer/";
+var headerDesign = "/admin/host/header-design/";
+var footerDesign = "/admin/host/footer-design/";
+var hostLaunch = "/admin/host/launch/";
+var hostLaunchDown = "/admin/host/launch-down/";
 	
 
 function ajaxCallGet(url,method){
@@ -50,6 +55,10 @@ function ajaxCallPost(url,method,data){
 	return resultData;
 }
 
+function hello(){
+	alert("hello");
+}
+
 $(document).ready(function(){
     
 	$("#hostName").blur(function(event){
@@ -74,6 +83,40 @@ $(document).ready(function(){
           	      return '<a href="'+hostAddress+pageList+full.hostName+'">'+(data.length!=null ?data.length:0)+'</a>&nbsp;&nbsp;&nbsp;&nbsp;';
           	    }	
             },
+            { "data": "isHeader",
+                "render": function ( data, type, full, meta ) {
+                	
+	                	if(data){
+	                		return '<a title="Edit Site" href="'+hostAddress+headerDesign+full.hostName+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+	                	}else{
+	                		
+	                		return '<a title="Create Header" href="'+hostAddress+headerFooterAdd+full.hostName+'" class="glyphicon glyphicon-plus-sign"></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+	                	}
+            	    }	
+              },
+            { "data": "isFooter",
+                  "render": function ( data, type, full, meta ) {
+                	  if(data){
+	                		return '<a title="Edit Site" href="'+hostAddress+footerDesign+full.hostName+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+	                	}else{
+	                		return '<a title="Create Footer" href="'+hostAddress+headerFooterAdd+full.hostName+'" class="glyphicon glyphicon-plus-sign"></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+	                	}
+              	    }	
+                },
+            { "data": "hostLaunchConfig.isActive",
+                    "render": function ( data, type, full, meta ) {
+	                  	  if(full.isHeader && full.isFooter && (full.pages.length != 0)){
+	  	                		if(!data){
+	  	                			return '<a title="Edit Site" href="'+hostAddress+hostLaunch+full.hostName+'" class="glyphicon glyphicon-hand-up"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+	  	                		}else{
+	  	                			return '<a title="Edit Site" href="'+hostAddress+hostLaunchDown+full.hostName+'" class="glyphicon glyphicon-hand-down"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+	  	                		}
+	  	                	}else{
+	  	                		return "Not";
+	  	                	}
+                		}	
+            },    
+                
             { "data": "editableInfo.createdBy" },
             { "data": "editableInfo.createdAt",
               "render": function ( data, type, full, meta ) {

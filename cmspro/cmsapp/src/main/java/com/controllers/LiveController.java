@@ -39,6 +39,7 @@ public class LiveController {
 		try{
 			HostResponse hostResponse = hostService.getHostByHostName(hostName);
 			if(hostResponse!=null){
+				if(hostResponse.getHostLaunchConfig().isActive()){
 				pageResponse = pageService.getPageByPageName(pageName,hostName);
 				if(pageResponse != null){
 					data.put("page", pageResponse);
@@ -49,7 +50,12 @@ public class LiveController {
 				data.put("pageType", pageName);
 				data.put("hostName", hostName);
 				data.put("hostType", null);
-				
+				}else{
+					if(hostName!=null){
+						data.put("hostType", hostName);
+					}
+					return new ModelAndView("admin/live/not-active", "data", data);
+				}
 			}else{
 				data.put("pageType", null);
 				data.put("hostName", null);
@@ -64,6 +70,34 @@ public class LiveController {
 	public ModelAndView formPageDesignew(@PathVariable("hostName") String hostName) throws IOException {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
+		PageResponse pageResponse = null;
+		try{
+			HostResponse hostResponse = hostService.getHostByHostName(hostName);
+			if(hostResponse!=null){
+				if(hostResponse.getHostLaunchConfig().isActive()){
+					pageResponse = pageService.getPageByPageName(hostResponse.getWelcomePage(),hostName);
+					if(pageResponse != null){
+						data.put("page", pageResponse);
+						data.put("header", hostResponse.getHeader());
+						data.put("footer", hostResponse.getFooter());
+						return new ModelAndView("admin/live/live", "data", data);
+					}
+					data.put("pageType", hostResponse.getWelcomePage());
+					data.put("hostName", hostName);
+					data.put("hostType", null);
+				}else{
+					if(hostName!=null){
+						data.put("hostType", hostName);
+					}
+					return new ModelAndView("admin/live/not-active", "data", data);
+				}
+				
+			}else{
+				data.put("pageType", null);
+				data.put("hostName", null);
+				data.put("hostType", hostName);
+			}
+		}catch(Exception ee){}
 		
 		if(hostService.getHostByHostName(hostName)==null){
 			data.put("pageType", null);

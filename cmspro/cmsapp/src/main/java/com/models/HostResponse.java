@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.modelUtility.EditableInfo;
 import com.modelUtility.HeaderFooter;
+import com.modelUtility.HostLaunchConfig;
 
 public class HostResponse {
 
@@ -15,6 +16,8 @@ private Long id;
 	private HeaderFooter footer;
 	private boolean isHeader;
 	private boolean isFooter;
+	private HostLaunchConfig hostLaunchConfig;
+	private String welcomePage;
 	private Set<PageResponse> pages;
 	private EditableInfo editableInfo;
 	
@@ -71,5 +74,17 @@ private Long id;
 	}
 	public void setEditableInfo(EditableInfo editableInfo) {
 		this.editableInfo = editableInfo;
+	}
+	public String getWelcomePage() {
+		return welcomePage;
+	}
+	public void setWelcomePage(String welcomePage) {
+		this.welcomePage = welcomePage;
+	}
+	public HostLaunchConfig getHostLaunchConfig() {
+		return hostLaunchConfig;
+	}
+	public void setHostLaunchConfig(HostLaunchConfig hostLaunchConfig) {
+		this.hostLaunchConfig = hostLaunchConfig;
 	}
 }
