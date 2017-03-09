@@ -1,3 +1,4 @@
+//var hostAddress="http://209.200.39.254:8989/cmsapp";
 var hostAddress="http://localhost:8989/cmsapp";
 var getPages = "/admin/page/getpages/";
 var pageDesign="/admin/page/page-design/";
@@ -20,7 +21,7 @@ function ajaxCallGet(url,method){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }
@@ -43,7 +44,7 @@ function ajaxCallPost(url,method,data){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }	
@@ -96,8 +97,7 @@ $(document).ready(function(){
               },
             { "data": "pageName",
                 "render": function ( data, type, full, meta ) {
-              	      return '<a title="Edit Site" href="'+data+'" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;&nbsp;'+
-              	      		 '<a title="View Site" href="'+hostAddress+pagePreview+full.pageName+'/host/'+full.hostName+'"  class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+              	      return '<a title="View Site" href="'+hostAddress+pagePreview+full.pageName+'/host/'+full.hostName+'"  class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
               	    } 	
               }
         ]

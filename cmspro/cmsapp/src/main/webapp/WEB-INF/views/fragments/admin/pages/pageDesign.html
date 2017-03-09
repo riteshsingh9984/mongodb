@@ -48,11 +48,12 @@
 	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
 	<script th:inline="javascript">
 		var hostAddress = "http://localhost:8989/cmsapp";
+		//var hostAddress="http://209.200.39.254:8989/cmsapp";
 		var count = 0;
 		var max = 0;
-		var rowsCount = 0;
-		$(document).ready(function() {
+		var rowsCount = 1;
 		
+		$(document).ready(function() {
 			var makeId;
 				$.each($('.full-border'), function() {
 					makeId = ((this.id).substring(0, (this.id).indexOf("container")));
@@ -87,7 +88,8 @@
 					    if(max < ((this.id).substring(0,(this.id).indexOf("insert"))))
 					    	max = ((this.id).substring(0,(this.id).indexOf("insert"))); 
 					});
-					count = max + 1;
+					count = max + rowsCount;
+					rowsCount++;
 					
 					
 									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn"))) + "template";
@@ -105,7 +107,7 @@
 																+ "</div>"
 																+"<div id='"+count+"elementArea' class='row full-border'>"
 																	+ "<div id='"+count+"elementDataArea' class='col-sm-11' >"
-																		+ "<textarea id='"+count+"elementData' rows='4' cols='50'>"
+																		+ "<textarea id='"+count+"elementData' rows='20' cols='50'>"
 																					+ "Enter text here...</textarea>"
 																	+ "</div>"
 																	+ "<div class='col-sm-1'>"
@@ -119,27 +121,27 @@
 									
 									/* tiinymce initilization */
 									tinymce.init({
-												selector : 'textarea',
-												plugins : [
-											           'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-											           'searchreplace wordcount visualblocks visualchars code fullscreen',
-											           'insertdatetime media nonbreaking save table contextmenu directionality',
-											           'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc' 
-											           ],
-												toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-													    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-														image_advtab: true,
-														mode : "textareas",
-														menubar : false,
-														statusbar : false
-													});
+										selector : 'textarea',
+										plugins : [
+									           'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+									           'searchreplace wordcount visualblocks visualchars code fullscreen',
+									           'insertdatetime media nonbreaking save table contextmenu directionality table',
+									           'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc' 
+									           ],
+										toolbar1: 'table | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+											    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+												image_advtab: true,
+												mode : "textareas",
+												menubar : false,
+												statusbar : false
+											});
 									
 									count++;
 								});
 				
 				/*Apply the all element on div*/
 				$(document).on('click','.selectBoxApply',function(event) {
-					alert("Apply clicked..!");
+					
 					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementData";
 					var applyElementData = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "applyElementData";
 					var elementArea = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementArea";
@@ -153,11 +155,11 @@
 				
 				/*Show the tinymce textbox to insert data into division*/
 				$(document).on('click','.insertElement',function(event) {
-					alert("Apply clicked..!");
+					
 					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementData";
 					var elementDataArea = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementDataArea";
 					$('#'+elementDataArea).html("");
-					$('#'+elementDataArea).html("<textarea id='"+elementDataId+"' rows='4' cols='50'>"
+					$('#'+elementDataArea).html("<textarea id='"+elementDataId+"' rows='20' cols='50'>"
 							+ "Enter text here...</textarea>");
 					var elementArea = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementArea";
 					var applyElementData = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "applyElementData";

@@ -45,7 +45,7 @@ $(document).ready(function(){
 	/*Adding Container From Template*/
 	$( document ).on( 'click', '.contentAddAction', function(event) {
 		var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("contentAddAction")))+"content";
-		   alert("It's works"+makeId);
+		   
 		   
 		   $("#"+makeId).append("<div>Cool</div>");
 		   
@@ -92,7 +92,7 @@ $(document).ready(function(){
 	
 	/*Get Pure Html*/
 	$( document ).on( 'click', '#getHtmlAction', function(event) {
-		   alert($('#templateBody').html());
+		   
 		   $('#myHtml').val($('#templateBody').html());
 		   
 		});

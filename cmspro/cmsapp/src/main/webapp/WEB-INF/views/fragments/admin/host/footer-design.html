@@ -61,9 +61,10 @@
 	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
 	<script th:inline="javascript">
 		var hostAddress = "http://localhost:8989/cmsapp";
+		//var hostAddress="http://209.200.39.254:8989/cmsapp";
 		var count = 0;
 		var max = 0;
-		var rowsCount = 0;
+		var rowsCount = 1;
 		$(document).ready(function() {
 		
 			var makeId;
@@ -99,8 +100,8 @@
 					    if(max < ((this.id).substring(0,(this.id).indexOf("insert"))))
 					    	max = ((this.id).substring(0,(this.id).indexOf("insert"))); 
 					});
-					count = max + 1;
-					
+					count = max + rowsCount;
+					rowsCount++;
 					
 					var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn"))) + "template";
 					$("#" + makeId).append(
@@ -151,7 +152,7 @@
 				
 				/*Apply the all element on div*/
 				$(document).on('click','.selectBoxApply',function(event) {
-					alert("Apply clicked..!");
+					
 					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementData";
 					var applyElementData = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "applyElementData";
 					var elementArea = ((event.target.id).substring(0,(event.target.id).indexOf("selectBoxApply")))+ "elementArea";
@@ -165,7 +166,7 @@
 				
 				/*Show the tinymce textbox to insert data into division*/
 				$(document).on('click','.insertElement',function(event) {
-					alert("Apply clicked..!");
+					
 					var elementDataId = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementData";
 					var elementDataArea = ((event.target.id).substring(0,(event.target.id).indexOf("insert")))+ "elementDataArea";
 					$('#'+elementDataArea).html("");

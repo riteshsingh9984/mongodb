@@ -1,3 +1,4 @@
+//var hostAddress="http://209.200.39.254:8989/cmsapp";
 var hostAddress="http://localhost:8989/cmsapp";
 var getTemplateByName ="/admin/templates/gettemplate/";
 var getTemplates = "/admin/templates/gettemplates";
@@ -21,7 +22,7 @@ function ajaxCallGet(url,method){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }
@@ -44,7 +45,7 @@ function ajaxCallPost(url,method,data){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }
@@ -58,7 +59,7 @@ $(document).ready(function(){
 	
 	
 	$("#templateName").blur(function(event){
-		alert("Saud");
+		
 		var yourTemplate = event.target.value;
         var tool = ajaxCallGet(hostAddress+getTemplateByName+event.target.value,"GET");
         if(tool == 'FOUND'){

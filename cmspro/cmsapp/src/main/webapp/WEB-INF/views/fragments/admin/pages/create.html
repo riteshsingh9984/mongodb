@@ -39,7 +39,7 @@
 							<strong>Select-Template</strong>
 						</div>
 						<div class="col-sm-8">
-							<select name="templateName" id='myTemplate' class='form-control'>
+							<select name="templateName" id='myTemplate' class='form-control '>
 								<option>Templates</option>
 								<option th:each="template : ${data.templates}"
 									th:value="${template.templateName}"
@@ -58,12 +58,30 @@
 			</div>
 
 			<!-- Template Preview -->
-			<div class="col-sm-6 full-border" style="height: 288px;">
+			<div class="col-sm-6 left-border right-border bottom-border">
 				<div id="templatePreview"></div>
 			</div>
 
 		</div>
 	</div>
-	<div th:replace="component :: jsLoadCreatePage"></div>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+		
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			var templates = /*[[${data.templates}]]*/ 'hello';
+			
+			$("#myTemplate").click(function(){
+				var value = $('select#myTemplate option:selected').val();
+				$.each(templates, function( index, template ) {
+					
+					if(value === template.templateName){
+						alert( index + ": " + template.templateName );		
+						$("#templatePreview").html(template.content);
+						$(".removeclass").hide();
+					}
+				}); 
+			});
+		});
+	</script>
 </body>
 </html>

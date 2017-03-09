@@ -132,12 +132,13 @@ public class HostController {
 		Set<HostResponse> hosts = hostService.getHosts();
 		HostResponse host = null;
 		Set<HostResponse> hostList = new HashSet<HostResponse>();
-		for(Object object : hosts){
-			host = gson.fromJson(gson.toJson(object), HostResponse.class);
-			if(host.getAliasName() == null )
-				host.setAliasName("Not-Set");	
-			hostList.add(host);
-		}
+		if(hosts != null)
+			for(Object object : hosts){
+				host = gson.fromJson(gson.toJson(object), HostResponse.class);
+				if(host.getAliasName() == null )
+					host.setAliasName("Not-Set");	
+				hostList.add(host);
+			}
 		Map<String,Object> data = new HashMap<String,Object>();
 		data.put("data", hostList);
 		

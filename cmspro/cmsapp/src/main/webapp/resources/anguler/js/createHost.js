@@ -1,3 +1,4 @@
+//var hostAddress="http://209.200.39.254:8989/cmsapp";
 var hostAddress="http://localhost:8989/cmsapp";
 var getHostByName ="/admin/host/gethost/";
 var getHosts = "/admin/host/gethosts";
@@ -27,7 +28,7 @@ function ajaxCallGet(url,method){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }
@@ -50,13 +51,13 @@ function ajaxCallPost(url,method,data){
 		});
 		
 		request.fail(function(jqXHR, textStatus) {
-		  alert( "Request failed: " + textStatus );
+		  
 		});
 	return resultData;
 }
 
 function hello(){
-	alert("hello");
+	
 }
 
 $(document).ready(function(){
@@ -74,6 +75,20 @@ $(document).ready(function(){
 	$('#example').DataTable( {
         "ajax": hostAddress+getHosts,
         "pageLength": 8,
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+        	if ( aData.isHeader && aData.isFooter && (aData.pages.length != 0) ){
+        		if(!aData.hostLaunchConfig.isActive){
+        			// Host Active
+        			$('td', nRow).css('background-color', '#F7DC6F');
+            	}else{
+            		// Host InActive
+            		$('td', nRow).css('background-color', '#82E0AA'); 
+            	}
+            }else{
+            	// Host Not ready for Active
+            	$('td', nRow).css('background-color', '#F1948A');
+            }
+        },
         "columns": [
             { "data": "id" },
             { "data": "hostName" },
@@ -109,6 +124,7 @@ $(document).ready(function(){
 	  	                		if(!data){
 	  	                			return '<a title="Edit Site" href="'+hostAddress+hostLaunch+full.hostName+'" class="glyphicon glyphicon-hand-up"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
 	  	                		}else{
+	  	                			
 	  	                			return '<a title="Edit Site" href="'+hostAddress+hostLaunchDown+full.hostName+'" class="glyphicon glyphicon-hand-down"></a>&nbsp;&nbsp;&nbsp;&nbsp;';
 	  	                		}
 	  	                	}else{

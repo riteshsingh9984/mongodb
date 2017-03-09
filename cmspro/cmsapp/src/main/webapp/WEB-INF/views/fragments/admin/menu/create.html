@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="component :: cssLoad"></div>
+
+<div th:replace="component :: title"></div>
+</head>
+<body>
+	<div class="row">
+		<div class="col-sm-12">
+			<div th:replace="component :: cmsHeader"></div>
+		</div>
+	</div>
+	<form action="#" th:action="@{/admin/host/save}" method="post">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 jumbotron text-center">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="btn btn-sm btn-info">Add</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+						<div class="itemList"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 ">
+					
+				</div>
+			</div>
+		</div>
+	</form>
+	<div th:replace="component :: jsLoadViewTemplate"></div>
+	
+	<script th:inline="javascript">
+		var hostAddress = "http://localhost:8989/cmsapp";
+		$(document).ready(function() {
+				var pages = /*[[${data.pages}]]*/'hello';
+				var hostName = /*[[${data.hostName}]]*/'hello';
+				var arrpages = [];
+				for(var i = 0; i< pages.length; i++){
+					arrpages.push(pages[i].pageName);
+				}
+				
+		});
+	</script>
+</body>
+</html>
