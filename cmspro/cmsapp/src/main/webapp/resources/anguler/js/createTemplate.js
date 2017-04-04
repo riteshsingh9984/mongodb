@@ -93,7 +93,7 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+counter+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+counter+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 							 '</div>'+
-								'<div id="'+counter+'container" class="row full-border text-center" >' +
+								'<div id="'+counter+'container" class="row templateborder templateborder full-border text-center" >' +
 								'<div id="'+counter+'template" class="col-sm-12 text-center " >'+
 								  		'<div id="'+counter+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
@@ -108,8 +108,8 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 							 '</div>'+
-							 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
+							 '<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-4 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  	'<div id="'+colCounter2+'template" class="col-sm-8 text-center " >'+
@@ -126,8 +126,8 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 							 '</div>'+
-								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'template" class="col-sm-8 text-center right-border" >'+
+								'<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-8 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center " >'+
@@ -148,11 +148,11 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 							'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 						     '</div>'+
-								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'template" class="col-sm-4 text-center right-border" >'+
+								'<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-4 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center right-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-4 text-center templateborder full-border" >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
 							  		'<div id="'+colCounter3+'template" class="col-sm-4 text-center" >'+
@@ -170,8 +170,8 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 							     '</div>'+
-								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'template" class="col-sm-3 text-center right-border" >'+
+								'<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-3 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  	'<div id="'+colCounter2+'template" class="col-sm-9 text-center " >'+
@@ -188,8 +188,8 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 							'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 						     '</div>'+
-								'<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								'<div id="'+colCounter1+'template" class="col-sm-9 text-center right-border" >'+
+								'<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								'<div id="'+colCounter1+'template" class="col-sm-9 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center " >'+
@@ -206,8 +206,8 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 						     '</div>'+
-							 '<div id="'+colCounter1+'container" class="row full-border text-center" >' +
-								  	'<div id="'+colCounter1+'template" class="col-sm-6 text-center right-border" >'+
+							 '<div id="'+colCounter1+'container" class="row templateborder full-border text-center" >' +
+								  	'<div id="'+colCounter1+'template" class="col-sm-6 text-center templateborder full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
 								  	'<div id="'+colCounter2+'template" class="col-sm-6 text-center " >'+
@@ -230,17 +230,17 @@ $(document).ready(function(){
 			$("#tpb").append('<div id="'+colCounter1+'removebtn" class="row  rmadmin text-center">' +
 								'<br/><div id="'+colCounter1+'remove" class="removeclass btn btn-sm btn-danger rmadmin ">Remove-Row</div>'+
 					          '</div>'+
-							  '<div id="'+colCounter1+'container" class="row full-border text-center text-center" >' +
-								  	'<div id="'+colCounter1+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+							  '<div id="'+colCounter1+'container" class="row templateborder full-border text-center " >' +
+								  	'<div id="'+colCounter1+'template" class="col-sm-3 templateborder text-center full-border" >'+
 								  		'<div id="'+colCounter1+'btn" class="btn btn-sm btn-info  rmadmin addtemplateContainer">Add-container</div>'+
 								  	'</div>'+
-								  	'<div id="'+colCounter2+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+								  	'<div id="'+colCounter2+'template" class="col-sm-3 templateborder text-center full-border" >'+
 							  			'<div id="'+colCounter2+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 							  		'</div>'+
-							  		'<div id="'+colCounter3+'template" class="col-sm-3 text-center bottom-border right-border" >'+
+							  		'<div id="'+colCounter3+'template" class="col-sm-3 templateborder text-center full-border" >'+
 						  				'<div id="'+colCounter3+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 						  			'</div>'+
-						  			'<div id="'+colCounter4+'template" class="col-sm-3 text-center bottom-border " >'+
+						  			'<div id="'+colCounter4+'template" class="col-sm-3 templateborder text-center full-border " >'+
 					  					'<div id="'+colCounter4+'btn" class="btn btn-sm btn-info rmadmin addtemplateContainer">Add-container</div>'+
 					  				'</div>'+
 							  '</div>');

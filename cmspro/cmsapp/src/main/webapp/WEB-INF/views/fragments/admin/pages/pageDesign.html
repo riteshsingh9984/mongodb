@@ -8,6 +8,21 @@
 <body>
 	<div th:replace="component :: cmsHeader"></div>
 	<div class="container-fluid">
+		<div class="row bottom-border">
+			<div class="col-sm-6 text-center">
+				<div id="adminMode" class="btn btn-sm btn-info">Admin Mode</div>
+				<div id="removeBorder" class="btn btn-sm btn-success">Border-Remove</div>
+				<div id="applyBorder" class="btn btn-sm btn-success">Border-Apply</div>
+				<div id="userMode" class="btn btn-sm btn-danger">User Mode</div>
+			</div>
+			<div class="col-sm-6" style="height:100px;">
+				<div  class="card" style="position:relative;">
+				<b >Current Mode:</b><p id="mode" style="color:green;position:absolute;margin-left:120px; margin-top:-20px;">admin</p><br/>
+					<b style="color:red;" >Never Apply in User-Mode !</b><br/>
+					
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-1">
 				<form id="myTemplateForm" action="#"
@@ -77,7 +92,29 @@
 							$('#myHtml').val($('#templateBody').html());
 							$("#myTemplateForm").submit();
 						});
-
+				
+				/*Remove border*/
+				$(document).on('click','#removeBorder',function(event) {
+					
+					$('#templateBody').find('.full-border').removeClass('full-border');
+				});
+				/*Apply border*/
+				$(document).on('click','#applyBorder',function(event) {
+					
+					$('#templateBody').find('.templateborder').addClass('full-border');
+				});
+				$(document).on('click','#userMode',function(event) {
+					$(".rmadmin").hide();
+					$('#mode').html("user");
+				
+				});
+				$(document).on('click','#adminMode',function(event) {
+					$(".rmadmin").show();
+					$('#mode').html("admin");
+					
+				});
+				
+				
 				/*Adding Container in Template*/
 				/*$(".addtemplateContainer").bind("click", function(event){*/
 				$(document).on('click','.addtemplateContainer',function(event) {
@@ -95,7 +132,7 @@
 									var makeId = ((event.target.id).substring(0,(event.target.id).indexOf("btn"))) + "template";
 									$("#" + makeId).append(
 													"<div class='row' id='"+count+"content'>"
-														+ "<div class='col-sm-12 bottom-border'>"
+														+ "<div class='col-sm-12 templateborder  full-border'>"
 															+ "<div class='rmadmin'>"
 																+ "<div class='row'>"
 																	+ "<div class='col-sm-6'>"
@@ -105,7 +142,7 @@
 																		+ "<div id='"+count+"contentRemoveAction' class='contentRemoveAction btn btn-sm btn-danger glyphicon glyphicon-remove'></div>"
 																	+ "</div>"
 																+ "</div>"
-																+"<div id='"+count+"elementArea' class='row full-border'>"
+																+"<div id='"+count+"elementArea' class='row templateborder full-border'>"
 																	+ "<div id='"+count+"elementDataArea' class='col-sm-11' >"
 																		+ "<textarea id='"+count+"elementData' rows='20' cols='50'>"
 																					+ "Enter text here...</textarea>"
